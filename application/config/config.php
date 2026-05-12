@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'https://adm.cpfadvogados.com.br';
-$config['base_url'] = 'http://127.0.0.1/questionario/';
+$config['base_url'] = 'http://viacaocidadedemaceio.com.br/questionario
 $GLOBALS['pos_parametro_lista'] = 4; // posição do parâmetro de lista (ex: /controller/method/parametro_lista/1)
 //$config['base_url'] = 'https://cleniofrancoadvogados.com.br/intranet/';
 /*
