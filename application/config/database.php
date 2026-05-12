@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',//'mysql669.umbler.com',
-	'username' => 'postgres',
-	'password' => 'postgres',
+	'hostname' => 'questionario.postgres.uhserver.com',//'mysql669.umbler.com',
+	'username' => 'questionario',
+	'password' => '307754@Ltquest',
 	'database' => 'questionario',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
