@@ -44,8 +44,8 @@ function listarRespostas(){
 		}
 		$.each(respostas, function(i, resposta){
 			console.log(resposta);
-			var sisperjudLabel = (resposta.sisperjud === 't') ? 'Sim' : 'Não';
-			var loasLabel = (resposta.loas === 't') ? 'Sim' : 'Não';
+			var sisperjudLabel = (resposta.sisperjud === 't') ? '<span class="badge bg-success">Sim</span>' : '<span class="badge bg-danger">Não</span>';
+			var loasLabel = (resposta.loas === 't') ? '<span class="badge bg-success">Sim</span>' : '<span class="badge bg-danger">Não</span>';
 			$("#corpoTblRespostas").append('<tr>\
 						<td class="ps-4"><div class="fw-bold">'+resposta.resposta+'</div><span class="small text-muted">ID: #'+resposta.id+'</span></td>\
 						<td>'+sisperjudLabel+'</td>\
