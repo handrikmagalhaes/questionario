@@ -52,7 +52,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <!--<p class="text-muted">Gerencie as solicitações do sistema</p>-->
             </div>
             <div class="col-md-6 text-md-end">
-                <button class="btn btn-primary rounded-pill px-4 shadow">
+                <button class="btn btn-primary rounded-pill px-4 shadow " data-bs-toggle="modal" data-bs-target="#formUsuarioModal">
                     <i class="fa-solid fa-plus me-2"></i>Novo Usuário
                 </button>
             </div>
@@ -80,39 +80,46 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         <div class="card table-card border-0 shadow-sm animate__animated animate__fadeInUp animate__delay-1s">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead>
-                        <tr class="py-3">
-                            <th class="ps-4">Nome</th>
-                            <th>Email</th>
-                            <th class="text-center">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="ps-4">
-                                <div class="fw-bold">Ricardo Oliveira Santos</div>
-                                <span class="small text-muted">ID: #8821</span>
-                            </td>
-                            <td>ricardo.oliveira@santos.com</td>
-                            <td class="text-center">
-                                <button class="btn btn-light btn-sm rounded-circle me-1" title="Visualizar"><i class="fa-solid fa-eye text-primary"></i></button>
-                                <button class="btn btn-light btn-sm rounded-circle" title="Editar"><i class="fa-solid fa-pen-to-square text-muted"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4">
-                                <div class="fw-bold">Maria Eduarda Ferreira</div>
-                                <span class="small text-muted">ID: #8822</span>
-                            </td>
-                            <td>maria.ferreira@ferreira.com</td>
-                            <td class="text-center">
-                                <button class="btn btn-light btn-sm rounded-circle me-1" title="Excluir"><i class="fa-solid fa-trash text-danger"></i></button>
-                                <button class="btn btn-light btn-sm rounded-circle" title="Editar"><i class="fa-solid fa-pen-to-square text-muted"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
+                <table class="table table-hover align-middle mb-0" id="tblUsuarios">
                 </table>
+            </div>
+        </div>
+        <div class="modal fade animate__animated animate__fadeIn" id="formUsuarioModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg p-4 rounded-4">
+                    <div class="modal-header border-0 pb-0">
+                        <h3 class="fw-bold">Cadastro de Usuário</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="usuarioForm" >
+                            <input type="hidden" name="id" id="id_usuario" value="">
+                            <div class="mb-4 mt-3">
+                                <label class="form-label small fw-bold">Nome</label>
+                                <input type="text" name="nome_usuario" id="nome_usuario" class="form-control rounded-3 py-2" placeholder="Seu nome completo" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold">Email</label>
+                                <input type="email" name="email_usuario" id="email_usuario" class="form-control rounded-3 py-2" placeholder="exemplo@email.com" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold">Senha</label>
+                                <div class="input-group">
+                                    <input type="password" id="senha_usuario" name="senha_usuario" class="form-control rounded-3 py-2" placeholder="Sua senha" required>
+                                    <button class="btn btn-outline-secondary rounded-3 border-start-0" type="button" id="toggleSenhaUsuario" aria-label="Mostrar senha">
+                                        <i class="fa-solid fa-eye text-primary"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="submit" id="btnCadastrarUsuario" class="btn btn-primary w-100 py-2 rounded-3 fw-bold shadow-sm">
+                                Cadastrar
+                            </button>
+                        </form>
+                        <!--<div class="text-center mt-4">
+                            <p class="small text-muted">Não tem conta? <a href="#" class="text-primary text-decoration-none fw-bold">Criar agora</a></p>
+                        </div>-->
+                    </div>
+                </div>
             </div>
         </div>
     </main>
