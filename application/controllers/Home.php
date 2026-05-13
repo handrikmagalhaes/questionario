@@ -41,7 +41,7 @@ class Home extends CI_Controller {
 		load_template();
 	}
 
-	public function login(){
+	function login(){
 		if(!isset($_SESSION)){ 
 			session_start(); 
 		}
