@@ -56,13 +56,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                             <div class="row mb-4">
                                 <div class="col-auto d-flex align-items-center">
-                                    <div class="form-check me-3">
+                                    <div class="form-check form-switch me-3">
                                         <input class="form-check-input" type="checkbox" name="sisperjud" id="sisperjud">
                                         <label class="form-check-label" for="sisperjud">SISPERJUD</label>
                                     </div>
                                 </div>
                                 <div class="col-auto d-flex align-items-center">
-                                    <div class="form-check">
+                                    <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" name="loas" id="loas">
                                         <label class="form-check-label" for="loas">LOAS</label>
                                     </div>
