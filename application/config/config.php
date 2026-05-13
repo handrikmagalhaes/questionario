@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/questionario';
-//$config['base_url'] = 'https://www.viacaocidadedemaceio.com.br/questionario/';
+//$config['base_url'] = 'http://localhost/questionario';
+$config['base_url'] = 'https://www.viacaocidadedemaceio.com.br/questionario/';
 $GLOBALS['pos_parametro_lista'] = 3; // posição do parâmetro de lista (ex: /controller/method/parametro_lista/1)
 //$config['base_url'] = 'https://cleniofrancoadvogados.com.br/intranet/';
 /*
