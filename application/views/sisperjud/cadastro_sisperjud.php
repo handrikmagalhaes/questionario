@@ -15,11 +15,11 @@
 		<div class="accordion" id="accordionPanelsStayOpenExample">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-				<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
 					<strong>1. DADOS DA PERÍCIA</strong>
 				</button>
 				</h2>
-				<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+				<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
 					<div class="accordion-body">
 						<div class="row g-3 mb-4">
 							<div class="col-12 col-md-6">
@@ -140,7 +140,7 @@
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-					<strong>2. DADOS DA PARTE PERICIADA</strong>
+					<strong>2. DADOS DA PARTE PERICIANDA</strong>
 				</button>
 				</h2>
 				<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
