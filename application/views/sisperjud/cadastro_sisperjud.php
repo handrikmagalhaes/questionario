@@ -627,42 +627,6 @@
 								</div>
 							</div>
 						</div>
-						<div class="row g-3 mb-4">
-							<div class="col-12 col-md-6">
-								<label class="form-label small fw-bold d-block mb-2">Houve o comparecimento de assistente técnico?</label>
-								<div class="d-flex gap-3 flex-wrap">
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="comparecimentoNao" id="comparecimentoNao" value="Não" >
-										<label class="form-check-label" for="comparecimentoNao">
-											Não
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="comparecimentoSim" id="comparecimentoSim" value="Sim">
-										<label class="form-check-label" for="comparecimentoSim">
-											Sim
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 col-md-6">
-								<label class="form-label small fw-bold d-block mb-2">A perícia é feita por telemedicina?</label>
-								<div class="d-flex gap-3 flex-wrap">
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="telemedicinaNao" id="telemedicinaNao" value="Não" >
-										<label class="form-check-label" for="telemedicinaNao">
-											Não
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="telemedicinaSim" id="telemedicinaSim" value="Sim">
-										<label class="form-check-label" for="telemedicinaSim">
-											Sim
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
