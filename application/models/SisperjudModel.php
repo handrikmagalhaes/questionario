@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class UsuarioModel extends CI_model {
+class SisperjudModel extends CI_model {
     
-    public function cadastrar_usuario($nome_usuario, $email_usuario, $senha_usuario){
+    public function cadastrar_sisperjud($nome_usuario, $email_usuario, $senha_usuario){
         if(!isset($_SESSION)){ 
             session_start(); 
         }
@@ -34,7 +34,7 @@ class UsuarioModel extends CI_model {
         }
     }   
 
-    public function alterar_usuario($id, $nome_usuario, $email_usuario, $senha_usuario = ''){
+    public function alterar_sisperjud($id, $nome_usuario, $email_usuario, $senha_usuario = ''){
         if(!isset($_SESSION)){ 
             session_start(); 
         }
@@ -69,7 +69,7 @@ class UsuarioModel extends CI_model {
         }
     }
 
-    public function listar_usuarios(){
+    public function listar_sisperjud(){
         if(!isset($_SESSION)){
             session_start();
         }
@@ -77,11 +77,12 @@ class UsuarioModel extends CI_model {
 			//Usuarios Nativos
             $this->db->select('*');
             //$this->db->like('nome_usuario', $busca, 'both');
-            $this->db->from('usuario');
-			//$this->db->order_by($campo, $ord);
+            $this->db->from('sisperjud');
+            $this->db->join('periciando', 'periciando.id = sisperjud.id_periciando', 'inner');
+			$this->db->order_by('periciando.nome_periciando', 'ASC');
             //$this->db->limit($registros_por_pagina);
             //$this->db->offset((($pagina - 1) * $registros_por_pagina));
-            $data['usuarios'] = $this->db->get()->result();
+            $data['pericias'] = $this->db->get()->result();
 			// CONTAGEM DE PÁGINAS
             //$this->db->like('nome_usuario', $busca, 'both');
             //$this->db->from('usuario');
@@ -93,7 +94,7 @@ class UsuarioModel extends CI_model {
         }
     }
 
-    public function excluir_usuario($vid){
+    public function excluir_sisperjud($vid){
         if(!isset($_SESSION)){ 
             session_start(); 
         }
@@ -113,7 +114,7 @@ class UsuarioModel extends CI_model {
         }
     }
 
-    public function alterar_senha_usuario($vid, $vsenha){
+    public function alterar_senha_sisperjud($vid, $vsenha){
         if(!isset($_SESSION)){ 
             session_start(); 
         }

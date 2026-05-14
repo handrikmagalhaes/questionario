@@ -35,7 +35,7 @@
                           Questionários
                       </a>
                       <ul class="dropdown-menu border-0 shadow-sm animate__animated animate__fadeInUp" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item py-2" href="#recurso1"><i class="fa-solid fa-circle-check text-primary me-2 small"></i>SISPERJUD</a></li>
+                          <li><a class="dropdown-item py-2" href="{url_base}sisperjud/lista"><i class="fa-solid fa-circle-check text-primary me-2 small"></i>SISPERJUD</a></li>
                           <li><a class="dropdown-item py-2" href="#recurso2"><i class="fa-solid fa-circle-check text-primary me-2 small"></i>LOAS</a></li>
                       </ul>
                   </li>
