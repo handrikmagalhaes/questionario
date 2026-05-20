@@ -3,9 +3,21 @@
 //     $('#descricao_usuario').summernote();
 // })
 $(document).ready(function() {
+	// Formatando data de hoje para o padrão do input date
+	var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2); // Adiciona 0 à esquerda se < 10
+    var month = ("0" + (now.getMonth() + 1)).slice(-2); // Mês é zero-indexed
+    var today = now.getFullYear() + "-" + (month) + "-" + (day);
+	// Preenchendo os campos com a data de hoje
+	$("#data_pericia").val(today);
+	$("#data_conclusao").val(today);
+    // Define o valor do input
+    $('#id-do-seu-campo').val(today);
 	$(".processo").mask("00000.000000/0000-00");
 	$(".cpf").mask("000.000.000-00");
 	listarPericias();
+	carregarOpcoesResposta();
+	habilitarSugestoesDeResposta();
 });
 
 function listarPericias(){
@@ -112,25 +124,123 @@ function editarPericia(id) {
 	});
 }
 
-function mudaNumeroRegistros(){
-	window.location.href = '/usuario/lista/1/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#select_paginas").val();
+$("#nascimento_periciando").on('blur', function() {
+	var dataNascimento = $(this).val(); // Formato YYYY-MM-DD
+	if (dataNascimento) {
+		var idade = calcularIdade(dataNascimento);
+		if (!isNaN(idade) && idade >= 0) {
+			$('#idade_periciando').val(idade);
+		} else {
+			$('#idade_periciando').val('');
+		}
+	} else {
+		$('#idade_periciando').val('');
+	}
+});
+
+function carregarOpcoesResposta() {
+	$.get($("#url_base").text() + "resposta/listar", function(data) {
+		var respostas = data.respostas || data;
+		if (!$.isArray(respostas)) {
+			console.error('Resposta inesperada de listar respostas:', data);
+			return;
+		}
+		window.respostaOptions = respostas
+			.map(function(item) { return item.resposta || ''; })
+			.filter(function(text) { return text && text.trim(); });
+		atualizaDatalistRespostas();
+	}, 'json');
 }
 
-$('#buscar').click(function(){
-	window.location.href = '/usuario/lista/1/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#select_paginas").val();
+function atualizaDatalistRespostas() {
+	var $datalist = $("#respostaOptions");
+	if (!$datalist.length || !window.respostaOptions) return;
+	$datalist.empty();
+	window.respostaOptions.forEach(function(text) {
+		$datalist.append($('<option>').val(text));
+	});
+}
+
+function habilitarSugestoesDeResposta() {
+	$("#formSisperjud input[type='text']").attr('list', 'respostaOptions');
+	criarContainerSugestoes();
+}
+
+function criarContainerSugestoes() {
+	if ($('#textareaSuggestions').length) return;
+	$('body').append('<div id="textareaSuggestions" class="resposta-suggestions d-none"></div>');
+	if (!$('#resposta-suggestion-style').length) {
+		$('head').append('<style id="resposta-suggestion-style">#textareaSuggestions {position:absolute; z-index:1050; background:#ffffff; border:1px solid #ced4da; border-radius:.5rem; box-shadow:0 .5rem 1rem rgba(0,0,0,.15); padding:.2rem; max-height:240px; overflow-y:auto; min-width:240px;}#textareaSuggestions button {width:100%; text-align:left; white-space:normal; padding:.55rem .75rem; border:none; background:transparent; color:#212529; border-radius:.375rem;}#textareaSuggestions button:hover {background:#f8f9fa;}#textareaSuggestions button:focus {outline:none;}</style>');
+	}
+}
+
+function atualizarSugestoesTextarea(element) {
+	if (!window.respostaOptions || !window.respostaOptions.length) return;
+	var $el = $(element);
+	var query = $el.val().toLowerCase();
+	var matches = window.respostaOptions.filter(function(text) {
+		return !query || text.toLowerCase().indexOf(query) !== -1;
+	});
+	matches = matches.slice(0, 10);
+	var $container = $('#textareaSuggestions');
+	$container.empty();
+	if (!matches.length) {
+		$container.append($('<button type="button" disabled>').text('Nenhuma resposta encontrada'));
+	} else {
+		matches.forEach(function(text) {
+			$container.append($('<button type="button" class="text-start">').text(text).attr('data-value', text));
+		});
+	}
+	posicionarContainerSugestoes($el);
+	$container.removeClass('d-none');
+}
+
+function posicionarContainerSugestoes($el) {
+	var offset = $el.offset();
+	var width = $el.outerWidth();
+	var height = $el.outerHeight();
+	$('#textareaSuggestions').css({ top: offset.top + height + 4, left: offset.left, width: width });
+}
+
+$(document).on('focus', '#formSisperjud textarea', function() {
+	atualizarSugestoesTextarea(this);
 });
-$('.numero-pagina').click(function(){
-	var pagina = $(this).text();
-	$('.page-item').attr('page-active', pagina);
-	window.location.href = '/usuario/lista/'+pagina+'/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#texto-paginas").val();
+
+$(document).on('input', '#formSisperjud textarea', function() {
+	atualizarSugestoesTextarea(this);
 });
-$('.voltar-pagina').click(function(){
-	var pagina = $(this).attr('page-active')-1;
-	$('.page-item').attr('page-active', pagina);
-	window.location.href = '/usuario/lista/'+pagina+'/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#texto-paginas").val();
+
+$(document).on('blur', '#formSisperjud textarea', function() {
+	setTimeout(function() {
+		$('#textareaSuggestions').addClass('d-none');
+	}, 150);
 });
-$('.proxima-pagina').click(function(){
-	var pagina = $(this).attr('page-active')-1;
-	$('.page-item').attr('page-active', pagina);
-	window.location.href = '/usuario/lista/'+pagina+'/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#texto-paginas").val();
+
+$(document).on('mousedown', '#textareaSuggestions button:not([disabled])', function(e) {
+	e.preventDefault();
+	var value = $(this).attr('data-value');
+	var $active = $(document.activeElement);
+	if ($active.is('textarea')) {
+		$active.val(value);
+		$active.focus();
+	}
+	$('#textareaSuggestions').addClass('d-none');
 });
+
+function calcularIdade(nascimento) {
+	var hoje = new Date();
+	var nascimentoDate = new Date(nascimento);
+	
+	// Ajuste para evitar erro de fuso horário
+	nascimentoDate.setDate(nascimentoDate.getDate() + 1);
+
+	var idade = hoje.getFullYear() - nascimentoDate.getFullYear();
+	var m = hoje.getMonth() - nascimentoDate.getMonth();
+
+	// Se o mês atual for antes do nascimento ou 
+	// no mês de nascimento mas antes do dia
+	if (m < 0 || (m === 0 && hoje.getDate() < nascimentoDate.getDate())) {
+		idade--;
+	}
+	return idade;
+}
