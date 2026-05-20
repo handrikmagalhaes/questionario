@@ -12,7 +12,6 @@
 		<a href="{url_base}sisperjud/lista" class="btn btn-secondary rounded-pill px-4">Voltar</a>
 	</div>
 	<form id="formSisperjud" method="post" enctype="multipart/form-data">
-		<datalist id="respostaOptions"></datalist>
 		<div class="accordion" id="accordionPanelsStayOpenExample">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -591,14 +590,14 @@
 								<label class="form-label small fw-bold d-block mb-2 text-justify">c. A parte pericianda já foi submetida à reabilitação profissional?</label>
 								<div class="d-flex gap-3 flex-wrap">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="rebilitacao" id="rebilitacaoNao" value="Não">
-										<label class="form-check-label" for="rebilitacaoNao">
+										<input class="form-check-input" type="radio" name="reabilitacao" id="reabilitacaoNao" value="Não">
+										<label class="form-check-label" for="reabilitacaoNao">
 											Não
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="rebilitacao" id="rebilitacaoSim" value="Sim">
-										<label class="form-check-label" for="rebilitacaoSim">
+										<input class="form-check-input" type="radio" name="reabilitacao" id="reabilitacaoSim" value="Sim">
+										<label class="form-check-label" for="reabilitacaoSim">
 											Sim
 										</label>
 									</div>
