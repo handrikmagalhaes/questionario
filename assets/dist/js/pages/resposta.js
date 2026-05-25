@@ -3,7 +3,16 @@
 //     $('#descricao_usuario').summernote();
 // })
 $(document).ready(function() {
+	$("#respostaForm").slideUp(); // Esconde o formulário inicialmente
 	listarRespostas();
+	// Evento change para o radio tipo_pericia
+	$(document).on('change', 'input[name="tipo_pericia"]', function() {
+		if($(this).val() === 'SISPERJUD') {
+			$("#respostaForm").slideDown(); // Mostra o formulário
+		} else {
+			$("#respostaForm").slideUp(); // Esconde o formulário
+		}
+	});
 });
 
 // Funcionalidade para ver a senha
@@ -30,8 +39,7 @@ function listarRespostas(){
 		$("#tblRespostas").html('<thead>\
                          		<tr class="py-3">\
 								<th class="ps-4">Resposta</th>\
-								<th>SISPERJUD</th>\
-								<th>LOAS</th>\
+								<th>Tipo da Perícia</th>\
 								<th class="text-center">Ações</th>\
                          		</tr>\
                      			</thead>\
@@ -44,12 +52,10 @@ function listarRespostas(){
 		}
 		$.each(respostas, function(i, resposta){
 			console.log(resposta);
-			var sisperjudLabel = (resposta.sisperjud === 't') ? '<span class="badge bg-success">Sim</span>' : '<span class="badge bg-danger">Não</span>';
-			var loasLabel = (resposta.loas === 't') ? '<span class="badge bg-success">Sim</span>' : '<span class="badge bg-danger">Não</span>';
-			$("#corpoTblRespostas").append('<tr>\
+			var tipoPericia = (resposta.tipo_pericia === 'SISPERJUD') ? '<span class="badge bg-success">SISPERJUD</span>' : '<span class="badge bg-primary">LOAS</span>';
+				$("#corpoTblRespostas").append('<tr>\
 						<td class="ps-4"><div class="fw-bold">'+resposta.resposta+'</div><span class="small text-muted">ID: #'+resposta.id+'</span></td>\
-						<td>'+sisperjudLabel+'</td>\
-						<td>'+loasLabel+'</td>\
+						<td>'+tipoPericia+'</td>\
 								<td class="text-center">\
 									<button class="btn btn-light btn-sm rounded-circle me-1" title="Excluir Resposta" onclick="excluirResposta('+resposta.id+')"><i class="fa-solid fa-trash text-danger"></i></button>\
 									<button class="btn btn-light btn-sm rounded-circle" title="Editar Resposta" onclick="editarResposta('+resposta.id+')" data-bs-toggle="modal" data-bs-target="#formRespostaModal"><i class="fa-solid fa-pen-to-square text-primary"></i></button>\

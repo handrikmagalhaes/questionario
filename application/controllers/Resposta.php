@@ -65,9 +65,7 @@ class Resposta extends CI_Controller {
 		if(isset($_SESSION['logado']) ){//&& $_SESSION['inserir_usuario']){
 			$this->load->model('RespostaModel');
 			$resposta = new RespostaModel;
-			$sisperjud = isset($_POST['sisperjud']) ? $_POST['sisperjud'] : '0';
-			$loas = isset($_POST['loas']) ? $_POST['loas'] : '0';
-			$retorno = $resposta->cadastrar_resposta($_POST['resposta'], $sisperjud, $loas);
+			$retorno = $resposta->cadastrar_resposta($_POST);
 			echo json_encode($retorno);
 		} else {
 			header('Location: '.base_url().'home');
@@ -81,9 +79,7 @@ class Resposta extends CI_Controller {
 		if(isset($_SESSION['logado'])){
 			$this->load->model('RespostaModel');
 			$resposta = new RespostaModel;
-			$sisperjud = isset($_POST['sisperjud']) ? 1 : 0;
-			$loas = isset($_POST['loas']) ? 1 : 0;
-			$retorno = $resposta->alterar_resposta($_POST['id'], $_POST['resposta'], $sisperjud, $loas);
+			$retorno = $resposta->alterar_resposta($_POST);
 			echo json_encode($retorno);
 		} else {
 			header('Location: '.base_url().'home');

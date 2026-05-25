@@ -71,11 +71,14 @@ class Home extends CI_Controller {
 					$_SESSION['nome'] = $data['usuario'][0]->nome_usuario;
 					$retorno['dados'] = 'Login realizado com sucesso!';
 				} else {
+					$retorno['existe'] = 0;
 					$retorno['dados'] = 'Senha incorreta!';
 				}
+			} else {
+				$retorno['dados'] = 'Usuário não encontrado!';
 			}
 		} else {
-			$retorno['dados'] = 'Preencha os campos corretamente!';
+			$retorno['dados'] = 'Dados inválidos!';
 		}
 		echo json_encode($retorno);
 
