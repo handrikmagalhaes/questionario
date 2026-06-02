@@ -343,6 +343,126 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 Cadastrar
                             </button>
                         </form>
+                        <form id="respostaLOASForm" >  
+                            <input type="hidden" name="id" id="id_resposta" value="">
+                            <input type="hidden" name="tipo_pericia" id="tipo_pericia_loas" value="LOAS">
+                            <div class="mb-4 mt-3">
+                                <label class="form-label small fw-bold" for="resposta">Resposta</label>
+                                <input type="text" name="resposta" id="resposta" class="processo form-control rounded-3 py-2" required>
+                            </div>
+                            <div class="row g-3 mb-4">
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label small fw-bold d-block mb-2 text-justify">Menor de 16 anos?</label>
+                                    <div class="d-flex gap-3 flex-wrap">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="menor" id="menorNao" value="Não">
+                                            <label class="form-check-label" for="menorNao">
+                                                Não
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="menor" id="menorSim" value="Sim">
+                                            <label class="form-check-label" for="menorSim">
+                                                Sim
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                            <div class="accordion" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item pe-none" id="accordion-item-1">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                                        <strong>Resposta aos quesitos (maiores de 16 anos)</strong>
+                                    </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                                        <div class="accordion-body">
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">1 - O periciando é, ou já foi portador de doença, lesão ou deficiência física, mental, intelectual ou sensorial (art. 20, &sect;2º, da Lei nº 8.742/93)? Em caso positivo, qual(is)?</label>
+                                                    <textarea name="portador_lesao_deficiencia" id="portador_lesao_deficiencia" class="form-control rounded-3 py-2" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">2 - Essa doença, moléstia ou lesão gera impedimento de longo prazo (superior à 02 anos), de natureza física, mental, intelectual ou sensorial, o qual, em interação com uma ou mais barreiras, pode obstruir sua participação plena e efetiva na sociedade em igualdade de condições com as demais pessoas (art. 20, &sect;2º, da Lei nº 8.742/93)?</label>
+                                                    <textarea name="limitacoes_funcionais" id="limitacoes_funcionais" class="form-control rounded-3 py-2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">3 - O autor possui alguma doença infectocontagiosa e/ou crônica, cujos aspectos físicos visíveis possam dificultar a sua inserção no mercado de trabalho e/ou na sociedade em virtude da elevada estigmatização social da doença:</label>
+                                                    <textarea name="doenca_infectocontagiosa" id="doenca_infectocontagiosa" class="form-control rounded-3 py-2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">4 - Essa doença, moléstia ou lesão impede o(a) periciando(a) de exercer plenamente os atos da vida civil (se pode, conscientemente exprimir sua vontade, decidir e/ou praticar atos simples próprios da vida em sociedade, como, por exemplo, celebrar contratos, inscrever-se em vestibular/concurso público, casar-se, etc.)?</label>
+                                                    <textarea name="exercer_plenamente" id="exercer_plenamente" class="form-control rounded-3 py-2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">5 - Havendo impedimento para o exercício pleno dos atos da vida civil (se afirmativa a resposta ao Quesito 4), ele é transitório ou permanente?</label>
+                                                    <textarea name="impedimento_transitorio_permanente" id="impedimento_transitorio_permanente" class="form-control rounded-3 py-2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">6 - O(a) periciando(a) necessita de permanente cuidados médicos, de enfermagem ou de terceiros? Em caso afirmativo, é possível estimar desde quando (dd/mm/aaaa)?</label>
+                                                    <textarea name="cuidados_medicos" id="cuidados_medicos" class="form-control rounded-3 py-2"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item pe-none" id="accordion-item-2">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                        <strong>Resposta aos quesitos (menores de 16 anos)</strong>
+                                    </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                        <div class="accordion-body">
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">1 - A doença ou lesão prejudica o desenvolvimento físico, mental e/ou intelectual do(a) periciando(a)?</label>
+                                                    <textarea name="prejudica_desenvolvimento" id="prejudica_desenvolvimento" class="form-control rounded-3 py-2" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">2 - A doença ou lesão torna o(a) periciando(a) incapaz ou prejudica significativamente o exercício de atividades inerentes a idade, tais como estudar, brincar, praticar esportes, divertir-se, etc. (artigo 16, inciso IV, do ECA), na mesma intensidade de uma criança em pleno gozo de sua saúde?</label>
+                                                    <textarea name="limitacoes_funcionais" id="limitacoes_funcionais" class="form-control rounded-3 py-2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">3 - O exercício de atividades que demandam esforços físicos pode acarretar o agravamento/piora do quadro clínico do(a) periciando(a)?</label>
+                                                    <textarea name="quadro_clinico" id="quadro_clinico" class="form-control rounded-3 py-2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">4 - Foi apresentado algum relatório ou documento escolar relativo ao(a) periciando(a)? Em caso positivo, houve a descrição de algum comportamento atípico ou necessidade de atenção especial em relação às outras crianças/adolescentes da mesma faixa etária? Essa descrição se coaduna com o exame realizado por ocasião da perícia?</label>
+                                                    <textarea name="documento_escolar" id="documento_escolar" class="form-control rounded-3 py-2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-24 col-md-12">
+                                                    <label class="form-label small fw-bold">A condição de saúde do menor é fator determinante para impedir o exercício de atividade laboral por seus pais e/ou responsáveis, obstaculizando o sustento familiar?</label>
+                                                    <textarea name="sustento_familiar" id="sustento_familiar" class="form-control rounded-3 py-2"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" id="btnCadastrarSisperjud" class="btn btn-primary w-100 py-2 mt-5 rounded-3 fw-bold shadow-sm">
+                                Cadastrar
+                            </button>
+                        </form>
                         <!--<div class="text-center mt-4">
                             <p class="small text-muted">Não tem conta? <a href="#" class="text-primary text-decoration-none fw-bold">Criar agora</a></p>
                         </div>-->

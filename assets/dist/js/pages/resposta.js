@@ -8,11 +8,27 @@ $(document).ready(function() {
 	// Evento change para o radio tipo_pericia
 	$(document).on('change', 'input[name="tipo_pericia"]', function() {
 		if($(this).val() === 'SISPERJUD') {
+			$("#respostaLOASForm").slideUp(); // Esconde o formulário LOAS
 			$("#respostaSISPERJUDForm").slideDown(); // Mostra o formulário
-		} else {
-			$("#respostaSISPERJUDForm").slideUp(); // Esconde o formulário
+		} else if($(this).val() === 'LOAS') {
+			$("#respostaSISPERJUDForm").slideUp(); // Esconde o formulário SISPERJUD
+			$("#respostaLOASForm").slideDown(); // Mostra o formulário
 		}
 	});
+	$(document).on('change', 'input[name="menor"]', function() {
+		if($(this).val() === 'Não') {
+			$("#accordion-item-1").removeClass('pe-none'); // Habilita o accordion para maiores de 16 anos
+			$("#accordion-item-2").addClass('pe-none'); // Desabilita o accordion para menores de 16 anos
+			$("#accordion-item-2 .accordion-collapse").removeClass('show'); // Fecha o accordion para menores de 16 anos
+			$("#accordion-item-1 .accordion-collapse").addClass('show'); // Abre o accordion para maiores de 16 anos
+		} else if($(this).val() === 'Sim') {
+			$("#accordion-item-1").addClass('pe-none'); // Desabilita o accordion para maiores de 16 anos
+			$("#accordion-item-2").removeClass('pe-none'); // Habilita o accordion para menores de 16 anos
+			$("#accordion-item-1 .accordion-collapse").removeClass('show'); // Fecha o accordion para maiores de 16 anos	
+			$("#accordion-item-2 .accordion-collapse").addClass('show'); // Abre o accordion para menores de 16 anos
+		}
+	});
+
 });
 
 function listarRespostas(){
@@ -80,12 +96,6 @@ $("#respostaSISPERJUDForm").submit(function(e){
 			}
 		}, 'json');
 	}
-});
-
-$('#formRespostaModal').on('hidden.bs.modal', function () {
-	$("#respostaSISPERJUDForm")[0].reset();
-	$("#id_resposta").val('');
-	$("#btnCadastrarResposta").text('Cadastrar');
 });
 
 // Função de exclusão de respostas
