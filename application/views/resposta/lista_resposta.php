@@ -67,8 +67,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </div>
                             </div>
                         </div>
-                        <form id="respostaForm" >
+                        <form id="respostaSISPERJUDForm" >  
                             <input type="hidden" name="id" id="id_resposta" value="">
+                            <input type="hidden" name="tipo_pericia" id="tipo_pericia_sisperjud" value="SISPERJUD">
                             <div class="mb-4 mt-3">
                                 <label class="form-label small fw-bold" for="resposta">Resposta</label>
                                 <input type="text" name="resposta" id="resposta" class="processo form-control rounded-3 py-2" required>
@@ -76,11 +77,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="accordion" id="accordionPanelsStayOpenExample">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingFive">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
-                                        <strong>5. EXAME CLÍNICO</strong>
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                                        <strong>EXAME CLÍNICO</strong>
                                     </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+                                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFive">
                                         <div class="accordion-body">
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
@@ -91,7 +92,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">b. Descreva, se houver, as limitações funcionais presentes diante das exigências físicas/intelectuais exigidas para o exercício do trabalho habitual - profissiografia</label>
-                                                    <textarea name="limitacoes_funcionais" id="limitacoes_funcionais" class="form-control rounded-3 py-2" required></textarea>
+                                                    <textarea name="limitacoes_funcionais" id="limitacoes_funcionais" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
@@ -169,7 +170,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">f. O(a) perito(a) teve acesso a que documentos médicos ou odontológicos da parte pericianda?</label>
-                                                    <textarea name="documentos_acesso" id="documentos_acesso" class="form-control rounded-3 py-2" required></textarea>
+                                                    <textarea name="documentos_acesso" id="documentos_acesso" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -178,10 +179,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingSix">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
-                                        <strong>6. ANÁLISE PERICIAL</strong>
+                                        <strong>ANÁLISE PERICIAL</strong>
                                     </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
+                                    <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSix">
                                         <div class="accordion-body">
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
@@ -208,10 +209,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
-                                        <strong>7. INFORMAÇÕES ADICIONAIS</strong>
+                                        <strong>INFORMAÇÕES ADICIONAIS</strong>
                                     </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
+                                    <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingSeven">
                                         <div class="accordion-body">
                                             <div class="row g-3 mb-4">
                                                 <div class="col-12 col-md-6">
@@ -252,7 +253,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">Informações complementares (Administrar valores)</label>
-                                                    <textarea name="estado_clinico" id="informacoes_valores" class="form-control rounded-3 py-2" required></textarea>
+                                                    <textarea name="informacoes_valores" id="informacoes_valores" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
@@ -283,7 +284,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">Informações complementares (Alteração Pós-Perícia)</label>
-                                                    <textarea name="estado_clinico" id="informacoes_pos_pericia" class="form-control rounded-3 py-2" required></textarea>
+                                                    <textarea name="informacoes_pos_pericia" id="informacoes_pos_pericia" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
@@ -308,13 +309,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">e. Havendo laudo judicial anterior, neste ou em outro rocesso, pelas mesmas patologias, indique, em caso de resultado diverso, os motivos que levaram a tal conclusão.</label>
-                                                    <textarea name="laudo_diverso" id="laudo_diverso" class="form-control rounded-3 py-2" required></textarea>
+                                                    <textarea name="laudo_diverso" id="laudo_diverso" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">f. Outros esclarecimentos que entenda pertinentes.</label>
-                                                    <textarea name="outros_esclarecimentos" id="outros_esclarecimentos" class="form-control rounded-3 py-2" required></textarea>
+                                                    <textarea name="outros_esclarecimentos" id="outros_esclarecimentos" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -323,15 +324,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingEight">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEight" aria-expanded="false" aria-controls="panelsStayOpen-collapseEight">
-                                        <strong>8. QUESITOS ADICIONAIS (do Juízo)</strong>
+                                        <strong>QUESITOS ADICIONAIS (do Juízo)</strong>
                                     </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
+                                    <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingEight">
                                         <div class="accordion-body">
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">Quesitos adicionais</label>
-                                                    <textarea name="quesitos_adicionais" id="quesitos_adicionais" class="form-control rounded-3 py-2" required></textarea>
+                                                    <textarea name="quesitos_adicionais" id="quesitos_adicionais" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                         </div>

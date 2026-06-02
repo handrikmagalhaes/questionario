@@ -3,35 +3,17 @@
 //     $('#descricao_usuario').summernote();
 // })
 $(document).ready(function() {
-	$("#respostaForm").slideUp(); // Esconde o formulário inicialmente
+	$("form").slideUp(); // Esconde o formulário inicialmente
 	listarRespostas();
 	// Evento change para o radio tipo_pericia
 	$(document).on('change', 'input[name="tipo_pericia"]', function() {
 		if($(this).val() === 'SISPERJUD') {
-			$("#respostaForm").slideDown(); // Mostra o formulário
+			$("#respostaSISPERJUDForm").slideDown(); // Mostra o formulário
 		} else {
-			$("#respostaForm").slideUp(); // Esconde o formulário
+			$("#respostaSISPERJUDForm").slideUp(); // Esconde o formulário
 		}
 	});
 });
-
-// Funcionalidade para ver a senha
-document.addEventListener('DOMContentLoaded', function () {
-	var toggle = document.getElementById('toggleSenhaUsuario');
-	if (!toggle) return;
-	toggle.addEventListener('click', function () {
-		var senha = document.getElementById('senha_usuario');
-		if (!senha) return;
-		var isPassword = senha.getAttribute('type') === 'password';
-		senha.setAttribute('type', isPassword ? 'text' : 'password');
-		var icon = this.querySelector('i');
-		if (icon) {
-			icon.classList.toggle('fa-eye');
-			icon.classList.toggle('fa-eye-slash');
-		}
-	});
-});
-
 
 function listarRespostas(){
 	$.get($("#url_base").text()+"resposta/listar", function(data){
@@ -59,6 +41,7 @@ function listarRespostas(){
 								<td class="text-center">\
 									<button class="btn btn-light btn-sm rounded-circle me-1" title="Excluir Resposta" onclick="excluirResposta('+resposta.id+')"><i class="fa-solid fa-trash text-danger"></i></button>\
 									<button class="btn btn-light btn-sm rounded-circle" title="Editar Resposta" onclick="editarResposta('+resposta.id+')" data-bs-toggle="modal" data-bs-target="#formRespostaModal"><i class="fa-solid fa-pen-to-square text-primary"></i></button>\
+									<button class="btn btn-light btn-sm rounded-circle" title="Ver Resposta" onclick="verResposta('+resposta.id+')" data-bs-toggle="modal" data-bs-target="#formRespostaModal"><i class="fa-solid fa-eye text-success"></i></button>\
 								</td>\
 							</tr>');
 		});
@@ -66,15 +49,17 @@ function listarRespostas(){
 }
 
 //Ação do botão de cadastrar usuário
-$("#respostaForm").submit(function(e){
+$("#respostaSISPERJUDForm").submit(function(e){
 	e.preventDefault();
 	if ($("#id_resposta").val() !== "") {
 		// Edição de resposta
 		$.post($("#url_base").text()+"resposta/alterar", $(this).serialize(), function(data){
+			console.log(data);
 			if (data.alterou === true) {
 				toastr.success('Resposta alterada com sucesso!');
 				$("#formRespostaModal").modal('hide');
-				$("#respostaForm")[0].reset();
+				$['input[name="tipo_pericia"]'].prop('checked', false);
+				$("#respostaSISPERJUDForm")[0].reset();
 				$("#id_resposta").val('');
 				$("#btnCadastrarResposta").text('Cadastrar');
 				listarRespostas();
@@ -98,7 +83,7 @@ $("#respostaForm").submit(function(e){
 });
 
 $('#formRespostaModal').on('hidden.bs.modal', function () {
-	$("#respostaForm")[0].reset();
+	$("#respostaSISPERJUDForm")[0].reset();
 	$("#id_resposta").val('');
 	$("#btnCadastrarResposta").text('Cadastrar');
 });
@@ -120,41 +105,77 @@ function excluirResposta(id) {
 // Função de edição de respostas
 function editarResposta(id) {
 	$.get($("#url_base").text()+"resposta/buscar", { id: id }, function(data) {
-		// Preencher o formulário com os dados da resposta
-		var parsed = typeof data === 'string' ? JSON.parse(data) : data;
-		var resposta = parsed.resposta || parsed;
-		console.log(resposta.resposta);
-		if (!resposta) {
-			toastr.error('Não foi possível carregar os dados da resposta.');
-			return;
+		dados = JSON.parse(data);
+		console.log(dados.resposta);
+		if (dados.resposta.tipo_pericia === 'SISPERJUD') {
+			$('input[name="tipo_pericia"][value="SISPERJUD"]').prop('checked', true).trigger('change');
+		} else {
+			$('input[name="tipo_pericia"][value="LOAS"]').prop('checked', true).trigger('change');
 		}
-		$("#id_resposta").val(resposta.id);
-		$("#resposta").val(resposta.resposta);
-		$("#sisperjud").prop('checked', resposta.sisperjud === 't');
-		$("#loas").prop('checked', resposta.loas === 't');
-		$("#btnCadastrarResposta").text('Alterar');
+		$("#id_resposta").val(dados.resposta.resposta_id);
+		$("#resposta").val(dados.resposta.resposta);
+		$("#estado_clinico").val(dados.resposta.estado_clinico);
+		$("#limitacoes_funcionais").val(dados.resposta.limitacoes_funcionais);
+		if (dados.resposta.afastamento == "Sim") {
+			$('input[name="afastamento"][value="Sim"]').prop('checked', true);
+		} else {			
+			$('input[name="afastamento"][value="Não"]').prop('checked', true);
+		}
+		if (dados.resposta.fisica_mental == "Sim") {
+			$('input[name="fisica_mental"][value="Sim"]').prop('checked', true);
+		} else {			
+			$('input[name="fisica_mental"][value="Não"]').prop('checked', true);
+		}
+		if (dados.resposta.realizando_tratamento == "Sim") {
+			$('input[name="realizando_tratamento"][value="Sim"]').prop('checked', true);
+		} else {			
+			$('input[name="realizando_tratamento"][value="Não"]').prop('checked', true);
+		}
+		if (dados.resposta.beneficio_previdenciario == "Sim") {
+			$('input[name="beneficio_previdenciario"][value="Sim"]').prop('checked', true);
+		} else {			
+			$('input[name="beneficio_previdenciario"][value="Não"]').prop('checked', true);
+		}
+		$("#documentos_acesso").val(dados.resposta.documentos_acesso);
+		if (dados.resposta.lesao_fisica_mental == "Sim") {
+			$('input[name="lesao_fisica_mental"][value="Sim"]').prop('checked', true);
+		} else {			
+			$('input[name="lesao_fisica_mental"][value="Não"]').prop('checked', true);
+		}
+		if (dados.resposta.respondeu_sozinha == "Sim") {
+			$('input[name="respondeu_sozinha"][value="Sim"]').prop('checked', true);
+		} else {			
+			$('input[name="respondeu_sozinha"][value="Não"]').prop('checked', true);
+		}
+		if (dados.resposta.valores_atrasados == "Sim") {
+			$('input[name="valores_atrasados"][value="Sim"]').prop('checked', true);
+		} else {			
+			$('input[name="valores_atrasados"][value="Não"]').prop('checked', true);
+		}
+		$("#informacoes_valores").val(dados.resposta.informacoes_valores);
+		if (dados.resposta.alteracao_incapacidade == "Sim") {
+			$('input[name="alteracao_incapacidade"][value="Sim"]').prop('checked', true);
+		} else if (dados.resposta.alteracao_incapacidade == "Não") {			
+			$('input[name="alteracao_incapacidade"][value="Não"]').prop('checked', true);
+		} else {
+			$('input[name="alteracao_incapacidade"][value="Não se aplica"]').prop('checked', true);
+		}
+		$("#informacoes_pos_pericia").val(dados.resposta.informacao_pos_pericia);
+		if (dados.resposta.conclusao_laudo == "Sim") {
+			$('input[name="conclusao_laudo"][value="Sim"]').prop('checked', true);
+		} else {			
+			$('input[name="conclusao_laudo"][value="Não"]').prop('checked', true);
+		}
+		$("#laudo_diverso").val(dados.resposta.laudo_diverso);
+		$("#outros_esclarecimentos").val(dados.resposta.outros_esclarecimentos);
+		$("#quesitos_adicionais").val(dados.resposta.quesitos_adicionais);		
+
+		$("#btnCadastrarSisperjud").text('Alterar');
 	});
 }
 
-function mudaNumeroRegistros(){
-	window.location.href = '/resposta/lista/1/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#select_paginas").val();
-}
-
-$('#buscar').click(function(){
-	window.location.href = '/resposta/lista/1/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#select_paginas").val();
-});
-$('.numero-pagina').click(function(){
-	var pagina = $(this).text();
-	$('.page-item').attr('page-active', pagina);
-	window.location.href = '/resposta/lista/'+pagina+'/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#texto-paginas").val();
-});
-$('.voltar-pagina').click(function(){
-	var pagina = $(this).attr('page-active')-1;
-	$('.page-item').attr('page-active', pagina);
-	window.location.href = '/resposta/lista/'+pagina+'/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#texto-paginas").val();
-});
-$('.proxima-pagina').click(function(){
-	var pagina = $(this).attr('page-active')-1;
-	$('.page-item').attr('page-active', pagina);
-	window.location.href = '/resposta/lista/'+pagina+'/'+$('#texto_busca').val()+'/'+$("#texto-campo").val()+'/'+$("#texto-ord").val()+'/'+$("#texto-paginas").val();
+$("#formRespostaModal").on('hidden.bs.modal', function () {
+	$("form").slideUp(); // Esconde o formulário quando o modal for fechado
+	$("form").reset; // Limpa os campos do formulário
+	$('input[name="tipo_pericia"]').prop('checked', false); // Desmarca os radios
 });

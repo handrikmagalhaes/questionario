@@ -11,32 +11,92 @@ class RespostaModel extends CI_model {
             date_default_timezone_set('America/Maceio');
             $retorno = array();
             $retorno['inseriu'] = false;
-
-            // Extrai e limpa dados vindos de POST (ou do array fornecido)
-            $resposta = isset($respostaData['resposta']) ? strip_tags($respostaData['resposta']) : '';
-            $resposta = stripcslashes($resposta);
-
-            // Determina sisperjud / loas a partir do radio `tipo_pericia` ou campos individuais
-            $sisperjud = 0;
-            $loas = 0;
-            if (isset($respostaData['tipo_pericia'])) {
-                $tipo = strtoupper(strip_tags($respostaData['tipo_pericia']));
-                if ($tipo === 'SISPERJUD') $sisperjud = 1;
-                if ($tipo === 'LOAS') $loas = 1;
-            } else {
-                if (isset($respostaData['sisperjud']) && ($respostaData['sisperjud'] === '1' || $respostaData['sisperjud'] === 't' || $respostaData['sisperjud'] === 'on')) $sisperjud = 1;
-                if (isset($respostaData['loas']) && ($respostaData['loas'] === '1' || $respostaData['loas'] === 't' || $respostaData['loas'] === 'on')) $loas = 1;
-            }
-
-            if ($resposta !== '' || $sisperjud || $loas) {
-                $data = array(
-                    'resposta' => $resposta,
-                    'sisperjud' => $sisperjud,
-                    'loas' => $loas
-                );
-                if ($this->db->insert('resposta', $data)) {
-                    $retorno['inseriu'] = true;
+            if (isset($respostaData['tipo_pericia']) && isset($respostaData['resposta'])) {
+                $resposta = isset($respostaData['resposta']) ? strip_tags($respostaData['resposta']) : '';
+                $resposta = stripcslashes($resposta);
+                $tipo_pericia = strip_tags($respostaData['tipo_pericia']);
+                $tipo_pericia = stripcslashes($tipo_pericia);
+                if ($respostaData['tipo_pericia'] === 'SISPERJUD') {
+                    // Extrai e limpa dados vindos de POST (ou do array fornecido)
+                    $estado_clinico = strip_tags($respostaData['estado_clinico']);
+                    $estado_clinico = stripcslashes($estado_clinico);
+                    $limitacoes_funcionais = strip_tags($respostaData['limitacoes_funcionais']);
+                    $limitacoes_funcionais = stripcslashes($limitacoes_funcionais); 
+                    $afastamento = strip_tags($respostaData['afastamento']);
+                    $afastamento = stripcslashes($afastamento);
+                    $fisica_mental = strip_tags($respostaData['fisica_mental']);
+                    $fisica_mental = stripcslashes($fisica_mental);
+                    $realizando_tratamento = strip_tags($respostaData['realizando_tratamento']);
+                    $realizando_tratamento = stripcslashes($realizando_tratamento);
+                    $beneficio_previdenciario = strip_tags($respostaData['beneficio_previdenciario']);
+                    $beneficio_previdenciario = stripcslashes($beneficio_previdenciario);
+                    $documentos_acesso = strip_tags($respostaData['documentos_acesso']);
+                    $documentos_acesso = stripcslashes($documentos_acesso);
+                    $lesao_fisica_mental = strip_tags($respostaData['lesao_fisica_mental']);
+                    $lesao_fisica_mental = stripcslashes($lesao_fisica_mental);
+                    $respondeu_sozinha = strip_tags($respostaData['respondeu_sozinha']);
+                    $respondeu_sozinha = stripcslashes($respondeu_sozinha);
+                    $valores_atrasados = strip_tags($respostaData['valores_atrasados']);
+                    $valores_atrasados = stripcslashes($valores_atrasados);
+                    $informacoes_valores = strip_tags($respostaData['informacoes_valores']);
+                    $informacoes_valores = stripcslashes($informacoes_valores);
+                    $alteracao_incapacidade = strip_tags($respostaData['alteracao_incapacidade']);
+                    $alteracao_incapacidade = stripcslashes($alteracao_incapacidade);
+                    $estado_clinico = strip_tags($respostaData['estado_clinico']);
+                    $estado_clinico = stripcslashes($estado_clinico);
+                    $conclusao_laudo = strip_tags($respostaData['conclusao_laudo']);
+                    $conclusao_laudo = stripcslashes($conclusao_laudo);
+                    $laudo_diverso = strip_tags($respostaData['laudo_diverso']);
+                    $laudo_diverso = stripcslashes($laudo_diverso);
+                    $outros_esclarecimentos = strip_tags($respostaData['outros_esclarecimentos']);
+                    $outros_esclarecimentos = stripcslashes($outros_esclarecimentos);
+                    $quesitos_adicionais = strip_tags($respostaData['quesitos_adicionais']);
+                    $quesitos_adicionais = stripcslashes($quesitos_adicionais);
+                    if ($resposta !== '') {
+                        $dataResposta = array(
+                            'resposta' => $resposta,
+                            'tipo_pericia' => $tipo_pericia,
+                        );
+                        $dataRespostaSisperjud = array(
+                            'estado_clinico' => $estado_clinico,
+                            'limitacoes_funcionais' => $limitacoes_funcionais,
+                            'afastamento' => $afastamento,
+                            'fisica_mental' => $fisica_mental,
+                            'realizando_tratamento' => $realizando_tratamento,
+                            'beneficio_previdenciario' => $beneficio_previdenciario,
+                            'documentos_acesso' => $documentos_acesso,
+                            'lesao_fisica_mental' => $lesao_fisica_mental,
+                            'respondeu_sozinha' => $respondeu_sozinha,
+                            'valores_atrasados' => $valores_atrasados,
+                            'informacoes_valores' => $informacoes_valores,
+                            'alteracao_incapacidade' => $alteracao_incapacidade,
+                            'estado_clinico' => $estado_clinico,
+                            'conclusao_laudo' => $conclusao_laudo,
+                            'laudo_diverso' => $laudo_diverso,
+                            'outros_esclarecimentos' => $outros_esclarecimentos,
+                            'quesitos_adicionais' => $quesitos_adicionais
+                        );
+                        if ($this->db->insert('resposta', $dataResposta)) {
+                            $id_resposta = $this->db->insert_id();
+                            $dataRespostaSisperjud = array_merge(array("resposta_id" => $id_resposta), $dataRespostaSisperjud);
+                            $inseriuResposta = true;
+                            if ($this->db->insert('resposta_sisperjud', $dataRespostaSisperjud)) {
+                                $inseriuRespostaSisperjud = true;
+                            }
+                        }
+                        if (isset($inseriuResposta) && $inseriuResposta && isset($inseriuRespostaSisperjud) && $inseriuRespostaSisperjud) {
+                            $retorno['inseriu'] = true;
+                        }
+                    }
+                } else if ($respostaData['tipo_pericia'] === 'LOAS') {
+                    $resposta = strip_tags($respostaData['resposta']);
+                    $resposta = stripcslashes($resposta);
+                } else {
+                    $resposta = '';
                 }
+
+
+
             }
             return $retorno;
         } else {
@@ -44,35 +104,110 @@ class RespostaModel extends CI_model {
         }
     }
 
-    public function alterar_resposta($id, $resposta, $sisperjud, $loas){
-        if(!isset($_SESSION)){ 
-            session_start(); 
+    public function alterar_resposta($respostaData){
+        if(!isset($_SESSION)){
+            session_start();
         }
         if (isset($_SESSION['logado'])) {
+            setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+            date_default_timezone_set('America/Maceio');
             $retorno = array();
             $retorno['alterou'] = false;
+            if (isset($respostaData['tipo_pericia']) && isset($respostaData['resposta'])) {
+                $id = strip_tags($respostaData['id']);
+                $id = stripcslashes($id);
+                $resposta = strip_tags($respostaData['resposta']);
+                $resposta = stripcslashes($resposta);
+                $tipo_pericia = strip_tags($respostaData['tipo_pericia']);
+                $tipo_pericia = stripcslashes($tipo_pericia);
+                if ($respostaData['tipo_pericia'] === 'SISPERJUD') {
+                    // Extrai e limpa dados vindos de POST (ou do array fornecido)
+                    $estado_clinico = strip_tags($respostaData['estado_clinico']);
+                    $estado_clinico = stripcslashes($estado_clinico);
+                    $limitacoes_funcionais = strip_tags($respostaData['limitacoes_funcionais']);
+                    $limitacoes_funcionais = stripcslashes($limitacoes_funcionais); 
+                    $afastamento = strip_tags($respostaData['afastamento']);
+                    $afastamento = stripcslashes($afastamento);
+                    $fisica_mental = strip_tags($respostaData['fisica_mental']);
+                    $fisica_mental = stripcslashes($fisica_mental);
+                    $realizando_tratamento = strip_tags($respostaData['realizando_tratamento']);
+                    $realizando_tratamento = stripcslashes($realizando_tratamento);
+                    $beneficio_previdenciario = strip_tags($respostaData['beneficio_previdenciario']);
+                    $beneficio_previdenciario = stripcslashes($beneficio_previdenciario);
+                    $documentos_acesso = strip_tags($respostaData['documentos_acesso']);
+                    $documentos_acesso = stripcslashes($documentos_acesso);
+                    $lesao_fisica_mental = strip_tags($respostaData['lesao_fisica_mental']);
+                    $lesao_fisica_mental = stripcslashes($lesao_fisica_mental);
+                    $respondeu_sozinha = strip_tags($respostaData['respondeu_sozinha']);
+                    $respondeu_sozinha = stripcslashes($respondeu_sozinha);
+                    $valores_atrasados = strip_tags($respostaData['valores_atrasados']);
+                    $valores_atrasados = stripcslashes($valores_atrasados);
+                    $informacoes_valores = strip_tags($respostaData['informacoes_valores']);
+                    $informacoes_valores = stripcslashes($informacoes_valores);
+                    $alteracao_incapacidade = strip_tags($respostaData['alteracao_incapacidade']);
+                    $alteracao_incapacidade = stripcslashes($alteracao_incapacidade);
+                    $estado_clinico = strip_tags($respostaData['estado_clinico']);
+                    $estado_clinico = stripcslashes($estado_clinico);
+                    $conclusao_laudo = strip_tags($respostaData['conclusao_laudo']);
+                    $conclusao_laudo = stripcslashes($conclusao_laudo);
+                    $laudo_diverso = strip_tags($respostaData['laudo_diverso']);
+                    $laudo_diverso = stripcslashes($laudo_diverso);
+                    $outros_esclarecimentos = strip_tags($respostaData['outros_esclarecimentos']);
+                    $outros_esclarecimentos = stripcslashes($outros_esclarecimentos);
+                    $quesitos_adicionais = strip_tags($respostaData['quesitos_adicionais']);
+                    $quesitos_adicionais = stripcslashes($quesitos_adicionais);
+                    if ($resposta !== '') {
+                        $dataResposta = array(
+                            'id' => $id,
+                            'resposta' => $resposta,
+                            'tipo_pericia' => $tipo_pericia,
+                        );
+                        $dataRespostaSisperjud = array(
+                            'resposta_id' => $id,
+                            'estado_clinico' => $estado_clinico,
+                            'limitacoes_funcionais' => $limitacoes_funcionais,
+                            'afastamento' => $afastamento,
+                            'fisica_mental' => $fisica_mental,
+                            'realizando_tratamento' => $realizando_tratamento,
+                            'beneficio_previdenciario' => $beneficio_previdenciario,
+                            'documentos_acesso' => $documentos_acesso,
+                            'lesao_fisica_mental' => $lesao_fisica_mental,
+                            'respondeu_sozinha' => $respondeu_sozinha,
+                            'valores_atrasados' => $valores_atrasados,
+                            'informacoes_valores' => $informacoes_valores,
+                            'alteracao_incapacidade' => $alteracao_incapacidade,
+                            'estado_clinico' => $estado_clinico,
+                            'conclusao_laudo' => $conclusao_laudo,
+                            'laudo_diverso' => $laudo_diverso,
+                            'outros_esclarecimentos' => $outros_esclarecimentos,
+                            'quesitos_adicionais' => $quesitos_adicionais
+                        );
+                        $this->db->where('id', $id);
+                        if ($this->db->update('resposta', $dataResposta)) {
+                            $dataRespostaSisperjud = array_merge(array("resposta_id" => $id), $dataRespostaSisperjud);
+                            $alterouResposta = true;
+                            $this->db->where('resposta_id', $id);
+                            if ($this->db->update('resposta_sisperjud', $dataRespostaSisperjud)) {
+                                $alterouRespostaSisperjud = true;
+                            }
+                        }
+                        if (isset($alterouResposta) && $alterouResposta && isset($alterouRespostaSisperjud) && $alterouRespostaSisperjud) {
+                            $retorno['alterou'] = true;
+                        }
+                    }
+                } else if ($respostaData['tipo_pericia'] === 'LOAS') {
+                    $resposta = strip_tags($respostaData['resposta']);
+                    $resposta = stripcslashes($resposta);
+                } else {
+                    $resposta = '';
+                }
 
-            $id = strip_tags($id);
-            $id = stripcslashes($id);
-            $resposta = strip_tags($resposta);
-            $resposta = stripcslashes($resposta);
-            $sisperjud = strip_tags($sisperjud);
-            $sisperjud = stripcslashes($sisperjud);
-            $loas = strip_tags($loas);
-            $loas = stripcslashes($loas);
 
-            $data = array(
-                'resposta' => $resposta,
-                'sisperjud' => $sisperjud,
-                'loas' => $loas
-            );
-            $this->db->where('id', $id);
-            if($this->db->update('resposta', $data)){
-                $retorno['alterou'] = true;
+
             }
             return $retorno;
         } else {
-            header('Location: '.base_url().'home');
+            header('Location: '.base_url().'login');
         }
     }
 
@@ -125,10 +260,25 @@ class RespostaModel extends CI_model {
         if(!isset($_SESSION)){
             session_start();
         }
-        $this->db->select('resposta, sisperjud, loas, id');
+        $this->db->select('tipo_pericia');
         $this->db->from('resposta');
         $this->db->where('id', $id);
         $resposta = $this->db->get()->row();
+        if ($resposta->tipo_pericia == "SISPERJUD") {
+            $this->db->select('resposta.*, resposta_sisperjud.*');
+            $this->db->from('resposta');
+            $this->db->join('resposta_sisperjud', 'resposta.id = resposta_sisperjud.resposta_id');
+            $this->db->where('resposta_id', $id);
+            $respostaDetalhada = $this->db->get()->row();
+            return array('resposta' => $respostaDetalhada);
+        } else if ($resposta->tipo_pericia == "LOAS") {
+            // Buscar detalhes específicos para LOAS, se necessário
+            return array('resposta' => "LOAS");
+        }
+        
+        echo $resposta->tipo_pericia;
+        
+        exit;
         return array('resposta' => $resposta);
     }
 }

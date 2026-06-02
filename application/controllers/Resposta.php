@@ -81,6 +81,7 @@ class Resposta extends CI_Controller {
 			$resposta = new RespostaModel;
 			$retorno = $resposta->alterar_resposta($_POST);
 			echo json_encode($retorno);
+			exit;
 		} else {
 			header('Location: '.base_url().'home');
 		}
