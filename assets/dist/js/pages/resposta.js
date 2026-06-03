@@ -64,7 +64,7 @@ function listarRespostas(){
 	}, 'json');
 }
 
-//Ação do botão de cadastrar usuário
+//Ação do botão de cadastrar formulário SISPERJUD
 $("#respostaSISPERJUDForm").submit(function(e){
 	e.preventDefault();
 	if ($("#id_resposta").val() !== "") {
@@ -77,7 +77,7 @@ $("#respostaSISPERJUDForm").submit(function(e){
 				$['input[name="tipo_pericia"]'].prop('checked', false);
 				$("#respostaSISPERJUDForm")[0].reset();
 				$("#id_resposta").val('');
-				$("#btnCadastrarResposta").text('Cadastrar');
+				$("#btnCadastrarResposta").text('Alterar');
 				listarRespostas();
 			} else {
 				toastr.error('Erro ao alterar resposta.');
@@ -89,7 +89,44 @@ $("#respostaSISPERJUDForm").submit(function(e){
 			if (data.inseriu === true) {
 				toastr.success('Resposta cadastrada com sucesso!');
 				$("#formRespostaModal").modal('hide');
-				$("#respostaForm")[0].reset();
+				$['input[name="tipo_pericia"]'].prop('checked', false);
+				$("#respostaSISPERJUDForm")[0].reset();
+				$("#id_resposta").val('');
+				$("#btnCadastrarResposta").text('Cadastrar');
+				listarRespostas();
+			} else {
+				toastr.error('Erro ao cadastrar resposta.');
+			}
+		}, 'json');
+	}
+});
+
+//Ação do botão de cadastrar formulário LOAS
+$("#respostaLOASForm").submit(function(e){
+	e.preventDefault();
+	if ($("#id_resposta_sisperjud").val() !== "" || $("#id_resposta_loas").val() !== "") {
+		// Edição de resposta
+		$.post($("#url_base").text()+"resposta/alterar", $(this).serialize(), function(data){
+			console.log(data);
+			if (data.alterou === true) {
+				toastr.success('Resposta alterada com sucesso!');
+				$("#formRespostaModal").modal('hide');
+				$['input[name="tipo_pericia"]'].prop('checked', false);
+				$("#respostaLOASForm")[0].reset();
+				$("#id_resposta").val('');
+				$("#btnCadastrarLoas").text('Alterar');
+				listarRespostas();
+			} else {
+				toastr.error('Erro ao alterar resposta.');
+			}
+		}, 'json');
+	} else if ($("#id_resposta_sisperjud").val() === "" && $("#id_resposta_loas").val() === "") {
+		// Cadastro de resposta
+		$.post($("#url_base").text()+"resposta/cadastrar", $(this).serialize(), function(data){
+			if (data.inseriu === true) {
+				toastr.success('Resposta cadastrada com sucesso!');
+				$("#formRespostaModal").modal('hide');
+				$("#respostaLOASForm")[0].reset();
 				listarRespostas();
 			} else {
 				toastr.error('Erro ao cadastrar resposta.');
@@ -116,76 +153,98 @@ function excluirResposta(id) {
 function editarResposta(id) {
 	$.get($("#url_base").text()+"resposta/buscar", { id: id }, function(data) {
 		dados = JSON.parse(data);
-		console.log(dados.resposta);
+		$("#id_resposta_sisperjud").val(dados.resposta.resposta_id);
+		$("#resposta_sisperjud").val(dados.resposta.resposta);
+		$("#id_resposta_loas").val(dados.resposta.resposta_id);
+		$("#resposta_loas").val(dados.resposta.resposta);
+		$('input[name="tipo_pericia"]').addClass('pe-none'); // Desabilita os radios para evitar alteração do tipo de perícia durante a edição
 		if (dados.resposta.tipo_pericia === 'SISPERJUD') {
 			$('input[name="tipo_pericia"][value="SISPERJUD"]').prop('checked', true).trigger('change');
+			$("#estado_clinico").val(dados.resposta.estado_clinico);
+			$("#limitacoes_funcionais").val(dados.resposta.limitacoes_funcionais);
+			if (dados.resposta.afastamento == "Sim") {
+				$('input[name="afastamento"][value="Sim"]').prop('checked', true);
+			} else {			
+				$('input[name="afastamento"][value="Não"]').prop('checked', true);
+			}
+			if (dados.resposta.fisica_mental == "Sim") {
+				$('input[name="fisica_mental"][value="Sim"]').prop('checked', true);
+			} else {			
+				$('input[name="fisica_mental"][value="Não"]').prop('checked', true);
+			}
+			if (dados.resposta.realizando_tratamento == "Sim") {
+				$('input[name="realizando_tratamento"][value="Sim"]').prop('checked', true);
+			} else {			
+				$('input[name="realizando_tratamento"][value="Não"]').prop('checked', true);
+			}
+			if (dados.resposta.beneficio_previdenciario == "Sim") {
+				$('input[name="beneficio_previdenciario"][value="Sim"]').prop('checked', true);
+			} else {			
+				$('input[name="beneficio_previdenciario"][value="Não"]').prop('checked', true);
+			}
+			$("#documentos_acesso").val(dados.resposta.documentos_acesso);
+			if (dados.resposta.lesao_fisica_mental == "Sim") {
+				$('input[name="lesao_fisica_mental"][value="Sim"]').prop('checked', true);
+			} else {			
+				$('input[name="lesao_fisica_mental"][value="Não"]').prop('checked', true);
+			}
+			if (dados.resposta.respondeu_sozinha == "Sim") {
+				$('input[name="respondeu_sozinha"][value="Sim"]').prop('checked', true);
+			} else {			
+				$('input[name="respondeu_sozinha"][value="Não"]').prop('checked', true);
+			}
+			if (dados.resposta.valores_atrasados == "Sim") {
+				$('input[name="valores_atrasados"][value="Sim"]').prop('checked', true);
+			} else {			
+				$('input[name="valores_atrasados"][value="Não"]').prop('checked', true);
+			}
+			$("#informacoes_valores").val(dados.resposta.informacoes_valores);
+			if (dados.resposta.alteracao_incapacidade == "Sim") {
+				$('input[name="alteracao_incapacidade"][value="Sim"]').prop('checked', true);
+			} else if (dados.resposta.alteracao_incapacidade == "Não") {			
+				$('input[name="alteracao_incapacidade"][value="Não"]').prop('checked', true);
+			} else {
+				$('input[name="alteracao_incapacidade"][value="Não se aplica"]').prop('checked', true);
+			}
+			$("#informacoes_pos_pericia").val(dados.resposta.informacao_pos_pericia);
+			if (dados.resposta.conclusao_laudo == "Sim") {
+				$('input[name="conclusao_laudo"][value="Sim"]').prop('checked', true);
+			} else {			
+				$('input[name="conclusao_laudo"][value="Não"]').prop('checked', true);
+			}
+			$("#laudo_diverso").val(dados.resposta.laudo_diverso);
+			$("#outros_esclarecimentos").val(dados.resposta.outros_esclarecimentos);
+			$("#quesitos_adicionais").val(dados.resposta.quesitos_adicionais);		
+			$("#btnCadastrarSisperjud").text('Alterar');			
 		} else {
 			$('input[name="tipo_pericia"][value="LOAS"]').prop('checked', true).trigger('change');
+			if (dados.resposta.menor == "Sim") {
+				$('input[name="menor"][value="Sim"]').prop('checked', true).trigger('change');
+			} else {			
+				$('input[name="menor"][value="Não"]').prop('checked', true).trigger('change');
+			}	
+			$("#portador_lesao_deficiencia").val(dados.resposta.portador_lesao_deficiencia);
+			$("#molestia_lesao").val(dados.resposta.molestia_lesao);
+			$("#doenca_infectocontagiosa").val(dados.resposta.doenca_infectocontagiosa);
+			$("#exercer_plenamente").val(dados.resposta.exercer_plenamente);
+			$("#impedimento_transitorio_permanente").val(dados.resposta.impedimento_transitorio_permanente);
+			$("#cuidados_medicos").val(dados.resposta.cuidados_medicos);
+			$("#prejudica_desenvolvimento").val(dados.resposta.prejudica_desenvolvimento);
+			$("#prejudica_atividades").val(dados.resposta.prejudica_atividades);
+			$("#quadro_clinico").val(dados.resposta.quadro_clinico);
+			$("#documento_escolar").val(dados.resposta.documento_escolar);
+			$("#sustento_familiar").val(dados.resposta.sustento_familiar);
+			$("#btnCadastrarLoas").text('Alterar');
 		}
-		$("#id_resposta").val(dados.resposta.resposta_id);
-		$("#resposta").val(dados.resposta.resposta);
-		$("#estado_clinico").val(dados.resposta.estado_clinico);
-		$("#limitacoes_funcionais").val(dados.resposta.limitacoes_funcionais);
-		if (dados.resposta.afastamento == "Sim") {
-			$('input[name="afastamento"][value="Sim"]').prop('checked', true);
-		} else {			
-			$('input[name="afastamento"][value="Não"]').prop('checked', true);
-		}
-		if (dados.resposta.fisica_mental == "Sim") {
-			$('input[name="fisica_mental"][value="Sim"]').prop('checked', true);
-		} else {			
-			$('input[name="fisica_mental"][value="Não"]').prop('checked', true);
-		}
-		if (dados.resposta.realizando_tratamento == "Sim") {
-			$('input[name="realizando_tratamento"][value="Sim"]').prop('checked', true);
-		} else {			
-			$('input[name="realizando_tratamento"][value="Não"]').prop('checked', true);
-		}
-		if (dados.resposta.beneficio_previdenciario == "Sim") {
-			$('input[name="beneficio_previdenciario"][value="Sim"]').prop('checked', true);
-		} else {			
-			$('input[name="beneficio_previdenciario"][value="Não"]').prop('checked', true);
-		}
-		$("#documentos_acesso").val(dados.resposta.documentos_acesso);
-		if (dados.resposta.lesao_fisica_mental == "Sim") {
-			$('input[name="lesao_fisica_mental"][value="Sim"]').prop('checked', true);
-		} else {			
-			$('input[name="lesao_fisica_mental"][value="Não"]').prop('checked', true);
-		}
-		if (dados.resposta.respondeu_sozinha == "Sim") {
-			$('input[name="respondeu_sozinha"][value="Sim"]').prop('checked', true);
-		} else {			
-			$('input[name="respondeu_sozinha"][value="Não"]').prop('checked', true);
-		}
-		if (dados.resposta.valores_atrasados == "Sim") {
-			$('input[name="valores_atrasados"][value="Sim"]').prop('checked', true);
-		} else {			
-			$('input[name="valores_atrasados"][value="Não"]').prop('checked', true);
-		}
-		$("#informacoes_valores").val(dados.resposta.informacoes_valores);
-		if (dados.resposta.alteracao_incapacidade == "Sim") {
-			$('input[name="alteracao_incapacidade"][value="Sim"]').prop('checked', true);
-		} else if (dados.resposta.alteracao_incapacidade == "Não") {			
-			$('input[name="alteracao_incapacidade"][value="Não"]').prop('checked', true);
-		} else {
-			$('input[name="alteracao_incapacidade"][value="Não se aplica"]').prop('checked', true);
-		}
-		$("#informacoes_pos_pericia").val(dados.resposta.informacao_pos_pericia);
-		if (dados.resposta.conclusao_laudo == "Sim") {
-			$('input[name="conclusao_laudo"][value="Sim"]').prop('checked', true);
-		} else {			
-			$('input[name="conclusao_laudo"][value="Não"]').prop('checked', true);
-		}
-		$("#laudo_diverso").val(dados.resposta.laudo_diverso);
-		$("#outros_esclarecimentos").val(dados.resposta.outros_esclarecimentos);
-		$("#quesitos_adicionais").val(dados.resposta.quesitos_adicionais);		
 
-		$("#btnCadastrarSisperjud").text('Alterar');
 	});
 }
 
-$("#formRespostaModal").on('hidden.bs.modal', function () {
+$("#formRespostaModal").on('hidden.bs.modal hide.bs.modal', function () {
 	$("form").slideUp(); // Esconde o formulário quando o modal for fechado
-	$("form").reset; // Limpa os campos do formulário
+	$("form")[0].reset(); // Limpa os campos do formulário
+	$("form")[1].reset(); // Limpa os campos do formulário
 	$('input[name="tipo_pericia"]').prop('checked', false); // Desmarca os radios
+	$('input[name="menor"]').prop('checked', false); // Desmarca os radios
+	$('input[name="tipo_pericia"]').removeClass('pe-none'); // Habilita os radios
 });

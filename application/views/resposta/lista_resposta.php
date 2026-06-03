@@ -68,11 +68,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                         </div>
                         <form id="respostaSISPERJUDForm" >  
-                            <input type="hidden" name="id" id="id_resposta" value="">
+                            <input type="hidden" name="id" id="id_resposta_sisperjud" value="">
                             <input type="hidden" name="tipo_pericia" id="tipo_pericia_sisperjud" value="SISPERJUD">
                             <div class="mb-4 mt-3">
                                 <label class="form-label small fw-bold" for="resposta">Resposta</label>
-                                <input type="text" name="resposta" id="resposta" class="processo form-control rounded-3 py-2" required>
+                                <input type="text" name="resposta" id="resposta_sisperjud" class="processo form-control rounded-3 py-2" required>
                             </div>
                             <div class="accordion" id="accordionPanelsStayOpenExample">
                                 <div class="accordion-item">
@@ -344,11 +344,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </button>
                         </form>
                         <form id="respostaLOASForm" >  
-                            <input type="hidden" name="id" id="id_resposta" value="">
+                            <input type="hidden" name="id" id="id_resposta_loas" value="">
                             <input type="hidden" name="tipo_pericia" id="tipo_pericia_loas" value="LOAS">
                             <div class="mb-4 mt-3">
                                 <label class="form-label small fw-bold" for="resposta">Resposta</label>
-                                <input type="text" name="resposta" id="resposta" class="processo form-control rounded-3 py-2" required>
+                                <input type="text" name="resposta" id="resposta_loas" class="processo form-control rounded-3 py-2" required>
                             </div>
                             <div class="row g-3 mb-4">
                                 <div class="col-12 col-md-6">
@@ -381,13 +381,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">1 - O periciando é, ou já foi portador de doença, lesão ou deficiência física, mental, intelectual ou sensorial (art. 20, &sect;2º, da Lei nº 8.742/93)? Em caso positivo, qual(is)?</label>
-                                                    <textarea name="portador_lesao_deficiencia" id="portador_lesao_deficiencia" class="form-control rounded-3 py-2" required></textarea>
+                                                    <textarea name="portador_lesao_deficiencia" id="portador_lesao_deficiencia" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">2 - Essa doença, moléstia ou lesão gera impedimento de longo prazo (superior à 02 anos), de natureza física, mental, intelectual ou sensorial, o qual, em interação com uma ou mais barreiras, pode obstruir sua participação plena e efetiva na sociedade em igualdade de condições com as demais pessoas (art. 20, &sect;2º, da Lei nº 8.742/93)?</label>
-                                                    <textarea name="limitacoes_funcionais" id="limitacoes_funcionais" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="molestia_lesao" id="molestia_lesao" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
@@ -428,13 +428,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">1 - A doença ou lesão prejudica o desenvolvimento físico, mental e/ou intelectual do(a) periciando(a)?</label>
-                                                    <textarea name="prejudica_desenvolvimento" id="prejudica_desenvolvimento" class="form-control rounded-3 py-2" required></textarea>
+                                                    <textarea name="prejudica_desenvolvimento" id="prejudica_desenvolvimento" class="form-control rounded-3 py-2" ></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">2 - A doença ou lesão torna o(a) periciando(a) incapaz ou prejudica significativamente o exercício de atividades inerentes a idade, tais como estudar, brincar, praticar esportes, divertir-se, etc. (artigo 16, inciso IV, do ECA), na mesma intensidade de uma criança em pleno gozo de sua saúde?</label>
-                                                    <textarea name="limitacoes_funcionais" id="limitacoes_funcionais" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="prejudica_atividades" id="prejudica_atividades" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
@@ -451,7 +451,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
-                                                    <label class="form-label small fw-bold">A condição de saúde do menor é fator determinante para impedir o exercício de atividade laboral por seus pais e/ou responsáveis, obstaculizando o sustento familiar?</label>
+                                                    <label class="form-label small fw-bold">5 - A condição de saúde do menor é fator determinante para impedir o exercício de atividade laboral por seus pais e/ou responsáveis, obstaculizando o sustento familiar?</label>
                                                     <textarea name="sustento_familiar" id="sustento_familiar" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
@@ -459,7 +459,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" id="btnCadastrarSisperjud" class="btn btn-primary w-100 py-2 mt-5 rounded-3 fw-bold shadow-sm">
+                            <button type="submit" id="btnCadastrarLoas" class="btn btn-primary w-100 py-2 mt-5 rounded-3 fw-bold shadow-sm">
                                 Cadastrar
                             </button>
                         </form>

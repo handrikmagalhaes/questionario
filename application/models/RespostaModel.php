@@ -89,8 +89,62 @@ class RespostaModel extends CI_model {
                         }
                     }
                 } else if ($respostaData['tipo_pericia'] === 'LOAS') {
-                    $resposta = strip_tags($respostaData['resposta']);
-                    $resposta = stripcslashes($resposta);
+                    $menor = strip_tags($respostaData['menor']);
+                    $menor = stripcslashes($menor);
+                    $portador_lesao_deficiencia = strip_tags($respostaData['portador_lesao_deficiencia']);
+                    $portador_lesao_deficiencia = stripcslashes($portador_lesao_deficiencia);
+                    $molestia_lesao = strip_tags($respostaData['molestia_lesao']);
+                    $molestia_lesao = stripcslashes($molestia_lesao);
+                    $doenca_infectocontagiosa = strip_tags($respostaData['doenca_infectocontagiosa']);
+                    $doenca_infectocontagiosa = stripcslashes($doenca_infectocontagiosa);
+                    $exercer_plenamente = strip_tags($respostaData['exercer_plenamente']);
+                    $exercer_plenamente = stripcslashes($exercer_plenamente);
+                    $impedimento_transitorio_permanente = strip_tags($respostaData['impedimento_transitorio_permanente']);
+                    $impedimento_transitorio_permanente = stripcslashes($impedimento_transitorio_permanente);
+                    $cuidados_medicos = strip_tags($respostaData['cuidados_medicos']);
+                    $cuidados_medicos = stripcslashes($cuidados_medicos);
+                    $prejudica_desenvolvimento = strip_tags($respostaData['prejudica_desenvolvimento']);
+                    $prejudica_desenvolvimento = stripcslashes($prejudica_desenvolvimento);
+                    $prejudica_atividades = strip_tags($respostaData['prejudica_atividades']);
+                    $prejudica_atividades = stripcslashes($prejudica_atividades);
+                    $quadro_clinico = strip_tags($respostaData['quadro_clinico']);
+                    $quadro_clinico = stripcslashes($quadro_clinico);
+                    $documento_escolar = strip_tags($respostaData['documento_escolar']);
+                    $documento_escolar = stripcslashes($documento_escolar);
+                    $sustento_familiar = strip_tags($respostaData['sustento_familiar']);
+                    $sustento_familiar = stripcslashes($sustento_familiar);
+                    if ($resposta !== '') {
+                        $dataResposta = array(
+                            'resposta' => $resposta,
+                            'tipo_pericia' => $tipo_pericia,
+                        );
+                        if ($this->db->insert('resposta', $dataResposta)) {
+                            $id_resposta = $this->db->insert_id();
+                            $dataRespostaLoas = array(
+                                'resposta_id' => $id_resposta,
+                                'menor' => $menor,
+                                'portador_lesao_deficiencia' => $portador_lesao_deficiencia,
+                                'molestia_lesao' => $molestia_lesao,
+                                'doenca_infectocontagiosa' => $doenca_infectocontagiosa,
+                                'exercer_plenamente' => $exercer_plenamente,
+                                'impedimento_transitorio_permanente' => $impedimento_transitorio_permanente,
+                                'cuidados_medicos' => $cuidados_medicos,
+                                'prejudica_desenvolvimento' => $prejudica_desenvolvimento,
+                                'prejudica_atividades' => $prejudica_atividades,
+                                'quadro_clinico' => $quadro_clinico,
+                                'documento_escolar' => $documento_escolar,
+                                'sustento_familiar' => $sustento_familiar
+                            );
+                            $inseriuResposta = true;
+                            if ($this->db->insert('resposta_loas', $dataRespostaLoas)) {
+                                $inseriuRespostaLoas = true;
+                            }
+                        }
+                        if (isset($inseriuResposta) && $inseriuResposta && isset($inseriuRespostaLoas) && $inseriuRespostaLoas) {
+                            $retorno['inseriu'] = true;
+                        }
+                    }
+
                 } else {
                     $resposta = '';
                 }
@@ -196,8 +250,64 @@ class RespostaModel extends CI_model {
                         }
                     }
                 } else if ($respostaData['tipo_pericia'] === 'LOAS') {
-                    $resposta = strip_tags($respostaData['resposta']);
-                    $resposta = stripcslashes($resposta);
+                    $menor = strip_tags($respostaData['menor']);
+                    $menor = stripcslashes($menor);
+                    $portador_lesao_deficiencia = strip_tags($respostaData['portador_lesao_deficiencia']);
+                    $portador_lesao_deficiencia = stripcslashes($portador_lesao_deficiencia);
+                    $molestia_lesao = strip_tags($respostaData['molestia_lesao']);
+                    $molestia_lesao = stripcslashes($molestia_lesao);
+                    $doenca_infectocontagiosa = strip_tags($respostaData['doenca_infectocontagiosa']);
+                    $doenca_infectocontagiosa = stripcslashes($doenca_infectocontagiosa);
+                    $exercer_plenamente = strip_tags($respostaData['exercer_plenamente']);
+                    $exercer_plenamente = stripcslashes($exercer_plenamente);
+                    $impedimento_transitorio_permanente = strip_tags($respostaData['impedimento_transitorio_permanente']);
+                    $impedimento_transitorio_permanente = stripcslashes($impedimento_transitorio_permanente);
+                    $cuidados_medicos = strip_tags($respostaData['cuidados_medicos']);
+                    $cuidados_medicos = stripcslashes($cuidados_medicos);
+                    $prejudica_desenvolvimento = strip_tags($respostaData['prejudica_desenvolvimento']);
+                    $prejudica_desenvolvimento = stripcslashes($prejudica_desenvolvimento);
+                    $prejudica_atividades = strip_tags($respostaData['prejudica_atividades']);
+                    $prejudica_atividades = stripcslashes($prejudica_atividades);
+                    $quadro_clinico = strip_tags($respostaData['quadro_clinico']);
+                    $quadro_clinico = stripcslashes($quadro_clinico);
+                    $documento_escolar = strip_tags($respostaData['documento_escolar']);
+                    $documento_escolar = stripcslashes($documento_escolar);
+                    $sustento_familiar = strip_tags($respostaData['sustento_familiar']);
+                    $sustento_familiar = stripcslashes($sustento_familiar);                    
+                    if ($resposta !== '') {
+                        $dataResposta = array(
+                            'id' => $id,
+                            'resposta' => $resposta,
+                            'tipo_pericia' => $tipo_pericia,
+                        );
+                        $dataRespostaLoas = array(
+                            'resposta_id' => $id,
+                            'menor' => $menor,
+                            'portador_lesao_deficiencia' => $portador_lesao_deficiencia,
+                            'molestia_lesao' => $molestia_lesao,
+                            'doenca_infectocontagiosa' => $doenca_infectocontagiosa,
+                            'exercer_plenamente' => $exercer_plenamente,
+                            'impedimento_transitorio_permanente' => $impedimento_transitorio_permanente,
+                            'cuidados_medicos' => $cuidados_medicos,
+                            'prejudica_desenvolvimento' => $prejudica_desenvolvimento,
+                            'prejudica_atividades' => $prejudica_atividades,
+                            'quadro_clinico' => $quadro_clinico,
+                            'documento_escolar' => $documento_escolar,
+                            'sustento_familiar' => $sustento_familiar
+                            );
+                        $this->db->where('id', $id);
+                        if ($this->db->update('resposta', $dataResposta)) {
+                            $dataRespostaLoas = array_merge(array("resposta_id" => $id), $dataRespostaLoas);
+                            $alterouResposta = true;
+                            $this->db->where('resposta_id', $id);
+                            if ($this->db->update('resposta_loas', $dataRespostaLoas)) {
+                                $alterouRespostaLoas = true;
+                            }
+                        }
+                        if (isset($alterouResposta) && $alterouResposta && isset($alterouRespostaLoas) && $alterouRespostaLoas) {
+                            $retorno['alterou'] = true;
+                        }
+                    }
                 } else {
                     $resposta = '';
                 }
@@ -272,14 +382,13 @@ class RespostaModel extends CI_model {
             $respostaDetalhada = $this->db->get()->row();
             return array('resposta' => $respostaDetalhada);
         } else if ($resposta->tipo_pericia == "LOAS") {
-            // Buscar detalhes específicos para LOAS, se necessário
-            return array('resposta' => "LOAS");
+            $this->db->select('resposta.*, resposta_loas.*');
+            $this->db->from('resposta');
+            $this->db->join('resposta_loas', 'resposta.id = resposta_loas.resposta_id');
+            $this->db->where('resposta_id', $id);
+            $respostaDetalhada = $this->db->get()->row();
+            return array('resposta' => $respostaDetalhada);
         }
-        
-        echo $resposta->tipo_pericia;
-        
-        exit;
-        return array('resposta' => $resposta);
     }
 }
 ?>
