@@ -67,7 +67,7 @@ class Sisperjud extends CI_Controller {
 			// DEFINE CSS
 			set_tema('css', load_css('dist/css/questionario'), FALSE);
 			// DEFINE JS
-			set_tema('js', load_js('dist/js/questionario'), FALSE);
+			//set_tema('js', load_js('dist/js/questionario'), FALSE);
 			set_tema('js', load_js('dist/js/masks'), FALSE);
 			set_tema('js', load_js('dist/js/pages/sisperjud'), FALSE);
 			// DEFINE URL_BASE

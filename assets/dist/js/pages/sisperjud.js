@@ -16,8 +16,7 @@ $(document).ready(function() {
 	$(".processo").mask("00000.000000/0000-00");
 	$(".cpf").mask("000.000.000-00");
 	listarPericias();
-	carregarOpcoesResposta();
-	habilitarSugestoesDeResposta();
+	carregaSelectRespostas();
 });
 
 function listarPericias(){
@@ -138,95 +137,6 @@ $("#nascimento_periciando").on('blur', function() {
 	}
 });
 
-function carregarOpcoesResposta() {
-	$.get($("#url_base").text() + "resposta/listar", function(data) {
-		var respostas = data.respostas || data;
-		if (!$.isArray(respostas)) {
-			console.error('Resposta inesperada de listar respostas:', data);
-			return;
-		}
-		window.respostaOptions = respostas
-			.map(function(item) { return item.resposta || ''; })
-			.filter(function(text) { return text && text.trim(); });
-		atualizaDatalistRespostas();
-	}, 'json');
-}
-
-function atualizaDatalistRespostas() {
-	var $datalist = $("#respostaOptions");
-	if (!$datalist.length || !window.respostaOptions) return;
-	$datalist.empty();
-	window.respostaOptions.forEach(function(text) {
-		$datalist.append($('<option>').val(text));
-	});
-}
-
-function habilitarSugestoesDeResposta() {
-	$("#formSisperjud input[type='text']").attr('list', 'respostaOptions');
-	criarContainerSugestoes();
-}
-
-function criarContainerSugestoes() {
-	if ($('#textareaSuggestions').length) return;
-	$('body').append('<div id="textareaSuggestions" class="resposta-suggestions d-none"></div>');
-	if (!$('#resposta-suggestion-style').length) {
-		$('head').append('<style id="resposta-suggestion-style">#textareaSuggestions {position:absolute; z-index:1050; background:#ffffff; border:1px solid #ced4da; border-radius:.5rem; box-shadow:0 .5rem 1rem rgba(0,0,0,.15); padding:.2rem; max-height:240px; overflow-y:auto; min-width:240px;}#textareaSuggestions button {width:100%; text-align:left; white-space:normal; padding:.55rem .75rem; border:none; background:transparent; color:#212529; border-radius:.375rem;}#textareaSuggestions button:hover {background:#f8f9fa;}#textareaSuggestions button:focus {outline:none;}</style>');
-	}
-}
-
-function atualizarSugestoesTextarea(element) {
-	if (!window.respostaOptions || !window.respostaOptions.length) return;
-	var $el = $(element);
-	var query = $el.val().toLowerCase();
-	var matches = window.respostaOptions.filter(function(text) {
-		return !query || text.toLowerCase().indexOf(query) !== -1;
-	});
-	matches = matches.slice(0, 10);
-	var $container = $('#textareaSuggestions');
-	$container.empty();
-	if (!matches.length) {
-		$container.append($('<button type="button" disabled>').text('Nenhuma resposta encontrada'));
-	} else {
-		matches.forEach(function(text) {
-			$container.append($('<button type="button" class="text-start">').text(text).attr('data-value', text));
-		});
-	}
-	posicionarContainerSugestoes($el);
-	$container.removeClass('d-none');
-}
-
-function posicionarContainerSugestoes($el) {
-	var offset = $el.offset();
-	var width = $el.outerWidth();
-	var height = $el.outerHeight();
-	$('#textareaSuggestions').css({ top: offset.top + height + 4, left: offset.left, width: width });
-}
-
-$(document).on('focus', '#formSisperjud textarea', function() {
-	atualizarSugestoesTextarea(this);
-});
-
-$(document).on('input', '#formSisperjud textarea', function() {
-	atualizarSugestoesTextarea(this);
-});
-
-$(document).on('blur', '#formSisperjud textarea', function() {
-	setTimeout(function() {
-		$('#textareaSuggestions').addClass('d-none');
-	}, 150);
-});
-
-$(document).on('mousedown', '#textareaSuggestions button:not([disabled])', function(e) {
-	e.preventDefault();
-	var value = $(this).attr('data-value');
-	var $active = $(document.activeElement);
-	if ($active.is('textarea')) {
-		$active.val(value);
-		$active.focus();
-	}
-	$('#textareaSuggestions').addClass('d-none');
-});
-
 function calcularIdade(nascimento) {
 	var hoje = new Date();
 	var nascimentoDate = new Date(nascimento);
@@ -244,3 +154,55 @@ function calcularIdade(nascimento) {
 	}
 	return idade;
 }
+
+function carregaSelectRespostas() {
+	$.get($("#url_base").text() + "resposta/listar", {"tipo": "SISPERJUD"}, function(data) {
+		$.each(data.respostas, function(i, resposta){
+			$("#selectRespostas").append('<option value="' + resposta.id + '">' + resposta.resposta + '</option>');
+		});
+	}, 'json');
+}
+
+$("#selectRespostas").change(function() {
+	if ($(this).val() != "") {
+		$.get($("#url_base").text() + "resposta/buscar", {"id": $(this).val()}, function(data) {
+			// Recebe JSON diretamente do servidor (dataType 'json' abaixo)
+			var resposta = data;
+			console.log(resposta);
+			$("#estado_clinico").val(resposta.resposta.estado_clinico);
+			$("#limitacoes_funcionais").val(resposta.resposta.limitacoes_funcionais);
+			if (resposta.resposta.lesao_fisica_mental == "Sim") {
+				$('input[name="lesao_fisica_mental"][value="Sim"]').prop('checked', true)	;
+			} else {
+				$('input[name="lesao_fisica_mental"][value="Não"]').prop('checked', true);
+			}
+			if (resposta.resposta.respondeu_sozinha == "Sim") {
+				$('input[name="respondeu_sozinha"][value="Sim"]').prop('checked', true)	;
+			} else {
+				$('input[name="respondeu_sozinha"][value="Não"]').prop('checked', true);
+			}
+			if (resposta.resposta.valores_atrasados == "Sim") {
+				$('input[name="valores_atrasados"][value="Sim"]').prop('checked', true)	;
+			} else {
+				$('input[name="valores_atrasados"][value="Não"]').prop('checked', true);
+			}
+			$("#informacoes_valores").val(resposta.resposta.informacoes_valores);
+			if (resposta.resposta.alteracao_incapacidade == "Sim") {
+				$('input[name="alteracao_incapacidade"][value="Sim"]').prop('checked', true)	;
+			} else if (resposta.resposta.alteracao_incapacidade == "Não") {
+				$('input[name="alteracao_incapacidade"][value="Não"]').prop('checked', true);
+			} else {
+				$('input[name="alteracao_incapacidade"][value="Não se aplica"]').prop('checked', true);
+			}
+			$("#informacoes_pos_pericia").val(resposta.resposta.informacoes_pos_pericia);
+			if (resposta.resposta.conclusao_laudo == "Sim") {
+				$('input[name="conclusao_laudo"][value="Sim"]').prop('checked', true)	;
+			} else {
+				$('input[name="conclusao_laudo"][value="Não"]').prop('checked', true);
+			}
+			$("#laudo_diverso").val(resposta.resposta.laudo_diverso);
+			$("#outros_esclarecimentos").val(resposta.resposta.outros_esclarecimentos);
+			$("#quesitos_adicionais").val(resposta.resposta.quesitos_adicionais);
+}, 'json');
+	}
+});

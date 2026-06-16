@@ -77,8 +77,8 @@ class SisperjudModel extends CI_model {
 			//Usuarios Nativos
             $this->db->select('*');
             //$this->db->like('nome_usuario', $busca, 'both');
-            $this->db->from('sisperjud');
-            $this->db->join('periciando', 'periciando.id = sisperjud.id_periciando', 'inner');
+            $this->db->from('pericias_sisperjud');
+            $this->db->join('periciando', 'periciando.id = pericias_sisperjud.periciando_id', 'inner');
 			$this->db->order_by('periciando.nome_periciando', 'ASC');
             //$this->db->limit($registros_por_pagina);
             //$this->db->offset((($pagina - 1) * $registros_por_pagina));

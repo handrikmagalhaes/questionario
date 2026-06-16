@@ -719,7 +719,7 @@
 						<div class="row g-3 mb-4">
 							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">f. O(a) perito(a) teve acesso a que documentos médicos ou odontológicos da parte pericianda?</label>
-								<textarea name="documentos_acesso" id="documentos_acesso" class="form-control rounded-3 py-2" required></textarea>
+								<textarea name="documentos_acesso" id="documentos_acesso" class="form-control rounded-3 py-2"></textarea>
 							</div>
 						</div>
 					</div>
@@ -735,6 +735,14 @@
 					<div class="accordion-body">
 						<div class="row g-3 mb-4">
 							<div class="col-24 col-md-12">
+								<label class="form-label small fw-bold">Escolha a resposta</label>
+								<select class="form-select" aria-label="Default select example" id="selectRespostas">
+									<option value="" selected>Selecione uma resposta</option>
+								</select>
+							</div>
+						</div>
+						<div class="row g-3 mb-4">
+							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">a. Descreva o estado clínico da parte pericianda</label>
 								<textarea name="estado_clinico" id="estado_clinico" class="form-control rounded-3 py-2" required></textarea>
 							</div>
@@ -743,84 +751,6 @@
 							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">b. Descreva, se houver, as limitações funcionais presentes diante das exigências físicas/intelectuais exigidas para o exercício do trabalho habitual - profissiografia</label>
 								<textarea name="limitacoes_funcionais" id="limitacoes_funcionais" class="form-control rounded-3 py-2" required></textarea>
-							</div>
-						</div>
-						<div class="row g-3 mb-4">
-							<div class="col-12 col-md-6">
-								<label class="form-label small fw-bold d-block mb-2 text-justify">a. A parte pericianda já teve algum afastamento de suas atividades laborais?</label>
-								<div class="d-flex gap-3 flex-wrap">
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="afastamento" id="afastamentoNao" value="Não">
-										<label class="form-check-label" for="afastamentoNao">
-											Não
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="afastamento" id="afastamentoSim" value="Sim">
-										<label class="form-check-label" for="afastamentoSim">
-											Sim
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row g-3 mb-4">
-							<div class="col-8 col-md-4">
-								<label class="form-label small fw-bold d-block mb-2 text-justify">c. A parte pericianda relata que tem (ou já teve) doença ou lesão física e/ou mental e/ou comorbidades associadas?</label>
-								<div class="d-flex gap-3 flex-wrap">
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="fisica_mental" id="fisica_mentalNao" value="Não">
-										<label class="form-check-label" for="fisica_mentalNao">
-											Não
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="fisica_mental" id="fisica_mentalSim" value="Sim">
-										<label class="form-check-label" for="fisica_mentalSim">
-											Sim
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-8 col-md-4">
-								<label class="form-label small fw-bold d-block mb-2 text-justify">d. A parte pericianda está realizando tratamento?</label>
-								<div class="d-flex gap-3 flex-wrap">
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="realizando_tratamento" id="realizando_tratamentoNao" value="Não" >
-										<label class="form-check-label" for="realizando_tratamentoNao">
-											Não
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="realizando_tratamento" id="realizando_tratamentoSim" value="Sim">
-										<label class="form-check-label" for="realizando_tratamento	Sim">
-											Sim
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-8 col-md-4">
-								<label class="form-label small fw-bold d-block mb-2">e. Houve incapacidade pretérita em período(s) além daquele(s) em que a parte pericianda já esteve em gozo de benefício previdenciário?</label>
-								<div class="d-flex gap-3 flex-wrap">
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="beneficio_previdenciario" id="beneficio_previdenciarioNao" value="Não" >
-										<label class="form-check-label" for="beneficio_previdenciarioNao	">
-											Não
-										</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="beneficio_previdenciario" id="beneficio_previdenciarioSim" value="Sim">
-										<label class="form-check-label" for="beneficio_previdenciarioSim">
-											Sim
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row g-3 mb-4">
-							<div class="col-24 col-md-12">
-								<label class="form-label small fw-bold">f. O(a) perito(a) teve acesso a que documentos médicos ou odontológicos da parte pericianda?</label>
-								<textarea name="documentos_acesso" id="documentos_acesso" class="form-control rounded-3 py-2" required></textarea>
 							</div>
 						</div>
 					</div>
@@ -903,7 +833,7 @@
 						<div class="row g-3 mb-4">
 							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">Informações complementares (Administrar valores)</label>
-								<textarea name="estado_clinico" id="informacoes_valores" class="form-control rounded-3 py-2" required></textarea>
+								<textarea name="informacoes_valores" id="informacoes_valores" class="form-control rounded-3 py-2" required></textarea>
 							</div>
 						</div>
 						<div class="row g-3 mb-4">
@@ -934,7 +864,7 @@
 						<div class="row g-3 mb-4">
 							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">Informações complementares (Alteração Pós-Perícia)</label>
-								<textarea name="estado_clinico" id="informacoes_pos_pericia" class="form-control rounded-3 py-2" required></textarea>
+								<textarea name="informacoes_pos_pericia" id="informacoes_pos_pericia" class="form-control rounded-3 py-2" required></textarea>
 							</div>
 						</div>
 						<div class="row g-3 mb-4">
@@ -1049,6 +979,10 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="col-md-12 mt-3 text-md-end">
+				<input type="submit" class="btn btn-success rounded-pill px-4" value="Salvar" id=btnSalvarSisperjud>
+				<input type="submit" class="btn btn-primary rounded-pill px-4 d-none" value="Alterar" id=btnAlterarSisperjud>
 			</div>
 		</div>	
 	</form>

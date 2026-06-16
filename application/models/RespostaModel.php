@@ -321,7 +321,7 @@ class RespostaModel extends CI_model {
         }
     }
 
-    public function listar_respostas(){
+    public function listar_respostas($tipo){
         if(!isset($_SESSION)){
             session_start();
         }
@@ -330,6 +330,9 @@ class RespostaModel extends CI_model {
             $this->db->select('*');
             //$this->db->like('nome_usuario', $busca, 'both');
             $this->db->from('resposta');
+            if ($tipo) {
+                $this->db->where('tipo_pericia', $tipo);
+            }
 			//$this->db->order_by($campo, $ord);
             //$this->db->limit($registros_por_pagina);
             //$this->db->offset((($pagina - 1) * $registros_por_pagina));
