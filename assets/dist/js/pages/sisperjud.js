@@ -53,9 +53,9 @@ function listarPericias(){
 }
 
 //Ação do botão de cadastrar usuário
-/*$("#usuarioForm").submit(function(e){
+$("#usuarioForm").submit(function(e){
 	e.preventDefault();
-	if ($("#id_usuario").val() !== "") {
+	if ($("#id_pericia").val() !== "") {
 		// Edição de usuário
 		$.post($("#url_base").text()+"usuario/alterar", $(this).serialize(), function(data){
 			if (data.alterou === true) {
@@ -83,7 +83,7 @@ function listarPericias(){
 			}
 		}, 'json');
 	}
-});*/
+});
 
 /*$('#formUsuarioModal').on('hidden.bs.modal', function () {
 	$("#usuarioForm")[0].reset();

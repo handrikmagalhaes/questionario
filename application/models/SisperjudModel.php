@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class SisperjudModel extends CI_model {
     
-    public function cadastrar_sisperjud($nome_usuario, $email_usuario, $senha_usuario){
+    public function cadastrar_sisperjud($dados){
         if(!isset($_SESSION)){ 
             session_start(); 
         }
@@ -13,23 +13,17 @@ class SisperjudModel extends CI_model {
             $retorno = array();
             $retorno['inseriu'] = false;
             // LIMPA DADOS
-            $nome_usuario = strip_tags($nome_usuario);
-            $email_usuario = strip_tags($email_usuario);
-            $senha_usuario = strip_tags($senha_usuario);
-
-
-            if($nome_usuario != '' || $email_usuario != '' || $senha_usuario != ''){
-                $data = array(
-                    'nome_usuario' => $nome_usuario,
-                    'email_usuario' => $email_usuario,
-                    'senha_usuario' => $senha_usuario,
-                    );
-                if($this->db->insert('usuario', $data)){
-                    $retorno['inseriu'] = true;
-                }
-            }       
-            return $retorno;
-        } else {
+            $data = array();
+            foreach ($dados as $key => $value) {
+                $data[$key] = strip_tags($value);
+                $data[$key] = stripcslashes($data[$key]);
+            }
+            if($this->db->insert('usuario', $data)){
+                $retorno['inseriu'] = true;
+            }
+        }       
+        return $retorno;
+    } else {
             header('Location: '.base_url().'login');
         }
     }   

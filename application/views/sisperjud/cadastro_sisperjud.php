@@ -2,7 +2,7 @@
 	<!-- Form header -->
 <div class="row mb-4 align-items-center">
 	<div class="col-md-6 mb-5">
-		<?php if (isset($dados['usuario'])): ?>
+		<?php if (isset($dados['pericia'])): ?>
 			<h2 class="fw-bold mb-0">Edição de Perícia SISPERJUD</h2>
 		<?php else: ?>
 			<h2 class="fw-bold mb-0">Cadastro de Perícia SISPERJUD</h2>
@@ -11,7 +11,8 @@
 	<div class="col-md-6 text-md-end">
 		<a href="{url_base}sisperjud/lista" class="btn btn-secondary rounded-pill px-4">Voltar</a>
 	</div>
-	<form id="formSisperjud" method="post" enctype="multipart/form-data">
+	<form id="formSisperjud" method="post" enctype="multipart/form-data" action="<?php echo isset($dados['pericia']) ? base_url().'sisperjud/alterar/'.$dados['pericia']->id : base_url().'sisperjud/cadastrar'; ?>">
+		<input type="hidden" name="id_pericia" id="id_pericia" value="<?php echo isset($dados['pericia']) ? $dados['pericia']->id : ''; ?>">
 		<div class="accordion" id="accordionPanelsStayOpenExample">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -981,8 +982,11 @@
 				</div>
 			</div>
 			<div class="col-md-12 mt-3 text-md-end">
-				<input type="submit" class="btn btn-success rounded-pill px-4" value="Salvar" id=btnSalvarSisperjud>
-				<input type="submit" class="btn btn-primary rounded-pill px-4 d-none" value="Alterar" id=btnAlterarSisperjud>
+				<?php if (isset($dados['pericia'])){ ?>
+					<input type="submit" class="btn btn-success rounded-pill px-4" value="Alterar" id=btnSalvar>
+				<?php } else { ?>
+					<input type="submit" class="btn btn-success rounded-pill px-4" value="Cadastrar" id=btnSalvar>
+				<?php } ?>
 			</div>
 		</div>	
 	</form>

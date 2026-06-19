@@ -67,7 +67,7 @@ function listarRespostas(){
 //Ação do botão de cadastrar formulário SISPERJUD
 $("#respostaSISPERJUDForm").submit(function(e){
 	e.preventDefault();
-	if ($("#id_resposta").val() !== "") {
+	if ($("#id_resposta_sisperjud").val() !== "") {
 		// Edição de resposta
 		$.post($("#url_base").text()+"resposta/alterar", $(this).serialize(), function(data){
 			console.log(data);
@@ -104,7 +104,7 @@ $("#respostaSISPERJUDForm").submit(function(e){
 //Ação do botão de cadastrar formulário LOAS
 $("#respostaLOASForm").submit(function(e){
 	e.preventDefault();
-	if ($("#id_resposta_sisperjud").val() !== "" || $("#id_resposta_loas").val() !== "") {
+	if ($("#id_resposta_loas").val() !== "") {
 		// Edição de resposta
 		$.post($("#url_base").text()+"resposta/alterar", $(this).serialize(), function(data){
 			console.log(data);
@@ -120,7 +120,7 @@ $("#respostaLOASForm").submit(function(e){
 				toastr.error('Erro ao alterar resposta.');
 			}
 		}, 'json');
-	} else if ($("#id_resposta_sisperjud").val() === "" && $("#id_resposta_loas").val() === "") {
+	} else if ($("#id_resposta_loas").val() === "") {
 		// Cadastro de resposta
 		$.post($("#url_base").text()+"resposta/cadastrar", $(this).serialize(), function(data){
 			if (data.inseriu === true) {

@@ -87,23 +87,32 @@ class Sisperjud extends CI_Controller {
 		}
 	}	
 
-	/*function cadastrar(){
+	function cadastrar(){
 		if(!isset($_SESSION)){ 
 			session_start(); 
 		}
 		if(isset($_SESSION['logado']) ){//&& $_SESSION['inserir_usuario']){
-			//Encriptando a senha do usuário
-			$senha_criptografada = password_hash($_POST['senha_usuario'], PASSWORD_DEFAULT);
+			// Realizando higienização dos dados recebidos do formulário
+			$dados = array_map('strip_tags', $_POST);
+			$dados = array_map('stripslashes', $dados);
 			$this->load->model('SisperjudModel');
 			$sisperjud = new SisperjudModel;
-			$retorno = $sisperjud->cadastrar_sisperjud($_POST['nome_usuario'], $_POST['email_usuario'], $senha_criptografada);
-			echo json_encode($retorno);
+			$data = array();
+			if ($retorno = $sisperjud->cadastrar_sisperjud($dados)){
+				$data['msg'] = "Perícia cadastrada com sucesso!";
+				$data['tipo'] = "success";
+				header('Location: '.base_url().'sisperjud/lista', $data);
+			} else {
+				$data['msg'] = "Erro ao cadastrar a perícia!";
+				$data['tipo'] = "error";
+				header('Location: '.base_url().'sisperjud/lista', $data);
+			}
 		} else {
 			header('Location: '.base_url().'home');
 		}
 	}
 
-	function alterar(){
+/*	function alterar(){
 		if(!isset($_SESSION)){
 			session_start();
 		}
@@ -125,7 +134,7 @@ class Sisperjud extends CI_Controller {
 		if(isset($_SESSION['logado']) ){//&& $_SESSION['editar_usuario']){
 			$this->load->model('SisperjudModel');
 			$sisperjud = new SisperjudModel;
-			//echo $_POST['chefia'];
+			echo $_POST['chefia'];
 			$retorno = $sisperjud->editar_sisperjud($_POST['id'], $_POST['nivel_acesso'], $_POST['cargo'], $_POST['departamento'], $_POST['chefia'], $_POST['nome'], $_POST['dt_nascimento'], $_POST['telefone'], $_POST['celular'], $_POST['celular_corporativo'], $_POST['email'], $_POST['login'], $_POST['nome_arquivo'], $_POST['caminho_arquivo'], $_POST['situacao'], $_POST['endereco'], $_POST['bairro'], $_POST['complemento'], $_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['num_cart_trab'], $_POST['dt_exp_cart_trab'], $_POST['serie_cart_trab'], $_POST['uf_cart_trab'], $_POST['cpf'], $_POST['num_identidade'], $_POST['dt_exp_identidade'], $_POST['orgao_exp_identidade'], $_POST['uf_identidade'], $_POST['num_cert_militar'], $_ POST['num_tit_eleitor'], $_POST['zona_tit_eleitor'], $_POST['secao_tit_eleitor'], $_ POST['num_cnh'], $_ POST['categoria_cnh'], $_ POST['validade_cnh'], $_ POST['nome_orgao_classe'], $_ POST['num_orgao_classe'], $_ POST['validade_orgao_classe'], $_ POST['num_pis'], $_ POST['banco_pis'], $_ POST['dt_cadastro_pis'], $_ POST['nome_pai'],)$_ POST ['nome_mae'],)$_ POST ['grau_escolaridade'],)$_ POST ['naturalidade'],)$_ POST ['nacionalidade'],)$_ POST ['estado_civil'],)$_ POST ['sexo'],)$_ POST ['nome_conjuge'],)$_ POST ['dt_nasc_conjuge'],)$_ POST ['ramal'],)$_ POST ['carga_horaria'],)$_ POST ['horario_expediente'],)$_ POST ['nome_contato_emergencia'],)$_ POST ['telefone_contato_emergencia'],)$_ POST ['plano_saude'],)$_ POST ['email_corporativo'],)$_ POST ['dt_admissao'],)$_ POST ['dt_demissao'],)$_ POST ['nome_contato_emergencia_2'],)$_ POST ['nome_contato_emergencia_3'],)$_ POST ['nome_contato_emergencia_4'],)$__POST(['nome_contato_emergencia_5']),$__POST(['telefone_contato_emergencia_2']),$__POST(['telefone_contato_emergencia_3']),$__POST(['telefone_contato_emergencia_4']),$__POST(['telefone_contato_emergencia_5']),$__POST(['nome_filho_1']),$__POST(['nome_filho_2']),$__POST(['nome_filho_3']),$__POST(['nome_filho_4']),$__POST(['nome_filho_5']),$__POST(['dt_nascimento_filho_1']),$__POST(['dt_nascimento_filho_2']),$__POST(['dt_nascimento_filho_3']),$__POST(['dt_nascimento_filho_4']),$__POST(['dt_nascimento_filho_5']);
 			echo json_encode($retorno);
 		} else {
@@ -145,7 +154,7 @@ class Sisperjud extends CI_Controller {
 		} else {
 			header('Location: '.base_url().'home');
 		}
-	} */
+	}*/ 
 
 	function listar(){
 		if(!isset($_SESSION)){ 
