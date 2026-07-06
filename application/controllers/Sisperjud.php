@@ -95,6 +95,7 @@ class Sisperjud extends CI_Controller {
 			// Realizando higienização dos dados recebidos do formulário
 			$dados = array_map('strip_tags', $_POST);
 			$dados = array_map('stripslashes', $dados);
+			unset($dados['id_pericia']);
 			$this->load->model('SisperjudModel');
 			$sisperjud = new SisperjudModel;
 			$data = array();

@@ -12,18 +12,37 @@ class SisperjudModel extends CI_model {
             date_default_timezone_set('America/Maceio');
             $retorno = array();
             $retorno['inseriu'] = false;
-            // LIMPA DADOS
-            $data = array();
-            foreach ($dados as $key => $value) {
-                $data[$key] = strip_tags($value);
-                $data[$key] = stripcslashes($data[$key]);
-            }
-            if($this->db->insert('usuario', $data)){
-                $retorno['inseriu'] = true;
-            }
-        }       
-        return $retorno;
-    } else {
+            
+            // Separando os dados do periciando
+            $periciando = array(
+                'nome_periciando' => $dados['nome_periciando'],
+                'cpf_periciando' => $dados['cpf_periciando'],
+                'rg_periciando' => $dados['rg_periciando'],
+                'nascimento_periciando' => $dados['nascimento_periciando'],
+                'nome_social_periciando' => $dados['nome_social'],
+                'sexo_biologico_periciando' => $dados['sexo_biologico'],
+                'identidade_gerenero_periciando' => $dados['identidade_genero'],
+                'raca_periciando' => $dados['raca'],
+                'estado_civil_periciando' => $dados['estado_civil'],
+                'grau_escolaridade_periciando' => $dados['grau_escolaridade'],
+                'profissao_periciando' => $dados['profissao'],
+                'uf_periciando' => $dados['uf'],
+                'formacao_periciando' => $dados['formacao_periciando'],
+                'outras_informacoes_periciando' => $dados['outras_informacoes']
+            );
+            $periciando = (object) $periciando;
+            print_r(var_dump($dados)."<br><br>");
+            print(var_dump($periciando));
+            exit;
+/*            if (this->db->insert('periciando', (object) $periciando)) {
+                $periciando_id = $this->db->insert_id();
+                $dados['periciando_id'] = $periciando_id;
+                if($this->db->insert('pericias_sisperjud', $dados)){
+                    $retorno['inseriu'] = true;
+                }
+            }*/
+            return $retorno;
+        } else {
             header('Location: '.base_url().'login');
         }
     }   
