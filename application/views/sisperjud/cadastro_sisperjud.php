@@ -52,6 +52,7 @@
 								<input type="date" name="data_pericia" id="data_pericia" class="form-control rounded-3 py-2" required>
 							</div>
 						</div>
+						<input type="hidden" name="periciando_id" id="periciando_id" value="0">
 						<div class="row g-3 mb-4">
 							<div class="col-12 col-md-6">
 								<label class="form-label small fw-bold">CPF do Periciando</label>
@@ -745,7 +746,7 @@
 						<div class="row g-3 mb-4">
 							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">a. Descreva o estado clínico da parte pericianda</label>
-								<textarea name="estado_clinico" id="estado_clinico" class="form-control rounded-3 py-2" required></textarea>
+								<textarea name="estado_clinico_exame" id="estado_clinico_exame" class="form-control rounded-3 py-2" required></textarea>
 							</div>
 						</div>
 						<div class="row g-3 mb-4">

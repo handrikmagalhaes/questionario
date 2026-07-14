@@ -10,37 +10,10 @@ class SisperjudModel extends CI_model {
         if (isset($_SESSION['logado'])) {
             setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
             date_default_timezone_set('America/Maceio');
-            $retorno = array();
-            $retorno['inseriu'] = false;
-            
-            // Separando os dados do periciando
-            $periciando = array(
-                'nome_periciando' => $dados['nome_periciando'],
-                'cpf_periciando' => $dados['cpf_periciando'],
-                'rg_periciando' => $dados['rg_periciando'],
-                'nascimento_periciando' => $dados['nascimento_periciando'],
-                'nome_social_periciando' => $dados['nome_social'],
-                'sexo_biologico_periciando' => $dados['sexo_biologico'],
-                'identidade_gerenero_periciando' => $dados['identidade_genero'],
-                'raca_periciando' => $dados['raca'],
-                'estado_civil_periciando' => $dados['estado_civil'],
-                'grau_escolaridade_periciando' => $dados['grau_escolaridade'],
-                'profissao_periciando' => $dados['profissao'],
-                'uf_periciando' => $dados['uf'],
-                'formacao_periciando' => $dados['formacao_periciando'],
-                'outras_informacoes_periciando' => $dados['outras_informacoes']
-            );
-            $periciando = (object) $periciando;
-            print_r(var_dump($dados)."<br><br>");
-            print(var_dump($periciando));
-            exit;
-/*            if (this->db->insert('periciando', (object) $periciando)) {
-                $periciando_id = $this->db->insert_id();
-                $dados['periciando_id'] = $periciando_id;
-                if($this->db->insert('pericias_sisperjud', $dados)){
-                    $retorno['inseriu'] = true;
-                }
-            }*/
+            $retorno = 0;
+            if($this->db->insert('pericias_sisperjud', $dados)){
+                $retorno = $this->db->insert_id();
+            }
             return $retorno;
         } else {
             header('Location: '.base_url().'login');

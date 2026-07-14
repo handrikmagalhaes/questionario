@@ -52,34 +52,28 @@ function listarPericias(){
 	}, 'json');
 }
 
-//Ação do botão de cadastrar usuário
-$("#usuarioForm").submit(function(e){
-	e.preventDefault();
-	if ($("#id_pericia").val() !== "") {
-		// Edição de usuário
-		$.post($("#url_base").text()+"usuario/alterar", $(this).serialize(), function(data){
-			if (data.alterou === true) {
-				toastr.success('Usuário alterado com sucesso!');
-				$("#formUsuarioModal").modal('hide');
-				$("#usuarioForm")[0].reset();
-				$("#id_usuario").val('');
-				$("#btnCadastrarUsuario").text('Cadastrar');
-				$("#senha_usuario").prop('required', true);
-				listarUsuarios();
-			} else {
-				toastr.error('Erro ao alterar usuário.');
-			}
-		}, 'json');
-	} else {
-		// Cadastro de usuário
-		$.post($("#url_base").text()+"usuario/cadastrar", $(this).serialize(), function(data){
-			if (data.inseriu === true) {
-				toastr.success('Usuário cadastrado com sucesso!');
-				$("#formUsuarioModal").modal('hide');
-				$("#usuarioForm")[0].reset();
-				listarUsuarios();
-			} else {
-				toastr.error('Erro ao cadastrar usuário.');
+$("#cpf_periciando").on('blur', function() {
+	var cpf = $(this).val();
+	if (cpf) {
+		$.get($("#url_base").text()+"periciando/buscar", { cpf: cpf }, function(data) {
+			if (data) {
+				//console.log(data);
+				$("#periciando_id").val(data.id);
+				$("#nome_periciando").val(data.nome_periciando);
+				$("#rg_periciando").val(data.rg_periciando);
+				$("#nascimento_periciando").val(data.nascimento_periciando);
+				$("#nome_social").val(data.nome_social_periciando);
+				$("#profissao").val(data.profissao_periciando);
+				$("#formacao").val(data.formacao_periciando);
+				$("#outras_formacoes").val(data.outras_formacoes_periciando);
+				$("#nascimento_periciando").trigger('blur'); // Atualiza a idade
+				// Preenche os radios de acordo com os valores retornados
+				$("input[name='sexo_biologico'][value='" + data.sexo_biologico_periciando + "']").prop('checked', true);
+				$("input[name='identidade_genero'][value='" + data.identidade_genero_periciando + "']").prop('checked', true);
+				$("input[name='raca'][value='" + data.raca_periciando + "']").prop('checked', true);
+				$("input[name='estado_civil'][value='" + data.estado_civil_periciando + "']").prop('checked', true);
+				$("input[name='grau_escolaridade'][value='" + data.grau_escolaridade_periciando + "']").prop('checked', true);
+				$("input[name='uf'][value='" + data.uf_periciando + "']").prop('checked', true);
 			}
 		}, 'json');
 	}
@@ -169,7 +163,7 @@ $("#selectRespostas").change(function() {
 			// Recebe JSON diretamente do servidor (dataType 'json' abaixo)
 			var resposta = data;
 			console.log(resposta);
-			$("#estado_clinico").val(resposta.resposta.estado_clinico);
+			$("#estado_clinico_exame").val(resposta.resposta.estado_clinico_exame);
 			$("#limitacoes_funcionais").val(resposta.resposta.limitacoes_funcionais);
 			if (resposta.resposta.lesao_fisica_mental == "Sim") {
 				$('input[name="lesao_fisica_mental"][value="Sim"]').prop('checked', true)	;
