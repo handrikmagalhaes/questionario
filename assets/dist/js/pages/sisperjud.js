@@ -8,15 +8,28 @@ $(document).ready(function() {
     var day = ("0" + now.getDate()).slice(-2); // Adiciona 0 à esquerda se < 10
     var month = ("0" + (now.getMonth() + 1)).slice(-2); // Mês é zero-indexed
     var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+	//Mostrando mensagens (caso haja)
+	if ($("#msg").length) {
+		var msg = $("#msg").text();
+		var tipo = $("#tipo").text();
+		if (tipo === "success") {
+			toastr.success(msg);
+		} else if (tipo === "error") {
+			toastr.error(msg);
+		}
+	}
 	// Preenchendo os campos com a data de hoje
 	$("#data_pericia").val(today);
 	$("#data_conclusao").val(today);
     // Define o valor do input
     $('#id-do-seu-campo').val(today);
-	$(".processo").mask("00000.000000/0000-00");
-	$(".cpf").mask("000.000.000-00");
 	listarPericias();
 	carregaSelectRespostas();
+	//Máscaras
+	$(".processo").mask("00000.000000/0000-00");
+	$(".cpf").mask("000.000.000-00");
+
 });
 
 function listarPericias(){
@@ -32,17 +45,21 @@ function listarPericias(){
                      			</thead>\
                      			<tbody id="corpoTblSisperjud"></tbody>');//Insere o conteúdo atualizado na tabela
 		var pericias = data.pericias || data;
-		//console.log(pericias);
+		console.log(pericias);
 		if (!$.isArray(pericias)) {
 			console.error('Resposta inesperada de listar perícias:', data);
 			return;
 		}
 		$.each(pericias, function(i, pericia){
 			//console.log(pericia);
+			let dataPericia = pericia.data_pericia;
+			const partes = dataPericia.split('-');
+			const dataFormatada = partes[2] + '/' + partes[1] + '/' + partes[0];
+			pericia.data_pericia = dataFormatada;
 			$("#corpoTblSisperjud").append('<tr>\
 								<td class="ps-4"><div class="fw-bold">'+pericia.nome_periciando+'</div><span class="small text-muted">ID: #'+pericia.id+'</span></td>\
 								<td>'+pericia.data_pericia+'</td>\
-								<td>'+pericia.processo+'</td>\
+								<td>'+pericia.numero_processo+'</td>\
 								<td class="text-center">\
 									<button class="btn btn-light btn-sm rounded-circle me-1" title="Excluir Perícia" onclick="excluirPericia('+pericia.id+')"><i class="fa-solid fa-trash text-danger"></i></button>\
 									<button class="btn btn-light btn-sm rounded-circle" title="Editar Perícia" onclick="editarPericia('+pericia.id+')" data-bs-toggle="modal" data-bs-target="#formPericiaModal"><i class="fa-solid fa-pen-to-square text-primary"></i></button>\

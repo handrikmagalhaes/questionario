@@ -142,13 +142,13 @@ class Sisperjud extends CI_Controller {
 				$sisperjud = new SisperjudModel;
 				$retorno = $sisperjud->cadastrar_sisperjud($dados);
 				if ($retorno){
-					$data['msg'] = "Perícia cadastrada com sucesso!";
-					$data['tipo'] = "success";
-					header('Location: '.base_url().'sisperjud/lista', $data);
+					$_SESSION['msg'] = "Perícia cadastrada com sucesso!";
+					$_SESSION['tipo'] = "success";
+					header('Location: '.base_url().'sisperjud/lista');
 				} else {
-					$data['msg'] = "Erro ao cadastrar a perícia!";
-					$data['tipo'] = "error";
-					header('Location: '.base_url().'sisperjud/lista', $data);
+					$_SESSION['msg'] = "Erro ao cadastrar a perícia!";
+					$_SESSION['tipo'] = "error";
+					header('Location: '.base_url().'sisperjud/lista');
 				}
 			}
 		} else {

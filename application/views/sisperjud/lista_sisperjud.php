@@ -1,5 +1,11 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+if (isset($_SESSION['msg']) && isset($_SESSION['tipo'])) {
+    echo '<label class="d-none" id="msg" >'.$_SESSION['msg'].'</label>';
+    echo '<label class="d-none" id="tipo" >'.$_SESSION['tipo'].'</label>';
+    unset($_SESSION['msg']);
+    unset($_SESSION['tipo']);
+}
 ?>
 <!--<!DOCTYPE html>
 <html lang="pt-br">
