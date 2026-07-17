@@ -107,7 +107,8 @@ $("#cpf_periciando").on('blur', function() {
 function excluirPericia(id) {
 	if (confirm('Tem certeza que deseja excluir esta perícia?')) {
 		$.get($("#url_base").text()+"sisperjud/excluir", { id: id }, function(data) {
-			if (data.excluiu === true) {
+			console.log(data.excluiu);
+			if (data.excluiu) {
 				toastr.success('Perícia excluída com sucesso!');
 				listarPericias();
 			} else {

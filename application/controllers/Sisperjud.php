@@ -184,7 +184,7 @@ class Sisperjud extends CI_Controller {
 		} else {
 			header('Location: '.base_url().'home');
 		}
-	}
+	} */
 
 	function excluir(){
 		if(!isset($_SESSION)){ 
@@ -198,7 +198,7 @@ class Sisperjud extends CI_Controller {
 		} else {
 			header('Location: '.base_url().'home');
 		}
-	}*/ 
+	}
 
 	function listar(){
 		if(!isset($_SESSION)){ 

@@ -61,7 +61,7 @@ class SisperjudModel extends CI_model {
         }
         if (isset($_SESSION['logado'])) {
 			//Usuarios Nativos
-            $this->db->select('*');
+            $this->db->select('periciando.nome_periciando, pericias_sisperjud.data_pericia, pericias_sisperjud.numero_processo, pericias_sisperjud.id');
             //$this->db->like('nome_usuario', $busca, 'both');
             $this->db->from('pericias_sisperjud');
             $this->db->join('periciando', 'periciando.id = pericias_sisperjud.periciando_id', 'inner');
@@ -93,7 +93,7 @@ class SisperjudModel extends CI_model {
 
             $this->db->where('id', $id);
 
-            if($this->db->delete('usuario')){
+            if($this->db->delete('pericias_sisperjud')){
                 $retorno['excluiu'] = true;
             }
             return $retorno;
