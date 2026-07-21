@@ -20,34 +20,16 @@ class SisperjudModel extends CI_model {
         }
     }   
 
-    public function alterar_sisperjud($id, $nome_usuario, $email_usuario, $senha_usuario = ''){
+    public function alterar_sisperjud($dados){
         if(!isset($_SESSION)){ 
             session_start(); 
         }
         if (isset($_SESSION['logado'])) {
             $retorno = array();
-            $retorno['alterou'] = false;
-
-            $id = strip_tags($id);
-            $id = stripcslashes($id);
-            $nome_usuario = strip_tags($nome_usuario);
-            $nome_usuario = stripcslashes($nome_usuario);
-            $email_usuario = strip_tags($email_usuario);
-            $email_usuario = stripcslashes($email_usuario);
-            $senha_usuario = strip_tags($senha_usuario);
-            $senha_usuario = stripcslashes($senha_usuario);
-
-            $data = array(
-                'nome_usuario' => $nome_usuario,
-                'email_usuario' => $email_usuario
-            );
-            if ($senha_usuario !== '') {
-                $data['senha_usuario'] = password_hash($senha_usuario, PASSWORD_DEFAULT);
-            }
-
-            $this->db->where('id', $id);
-            if($this->db->update('usuario', $data)){
-                $retorno['alterou'] = true;
+            $retorno = false;
+            $this->db->where('id', $dados['id']);
+            if($this->db->update('pericias_sisperjud', $dados)){
+                $retorno = true;
             }
             return $retorno;
         } else {
@@ -130,11 +112,13 @@ class SisperjudModel extends CI_model {
         if(!isset($_SESSION)){
             session_start();
         }
-        $this->db->select('nome_usuario, email_usuario, senha_usuario, id');
-        $this->db->from('usuario');
-        $this->db->where('usuario.id', $id);
-        $usuario = $this->db->get()->row();
-        return array('usuario' => $usuario);
+            $this->db->select('pericias_sisperjud.*, periciando.nome_periciando, periciando.cpf_periciando, periciando.rg_periciando, periciando.nascimento_periciando, periciando.nome_social_periciando, periciando.sexo_biologico_periciando, periciando.identidade_genero_periciando, periciando.raca_periciando, periciando.estado_civil_periciando, periciando.grau_escolaridade_periciando, periciando.profissao_periciando, periciando.uf_periciando, periciando.formacao_periciando, periciando.outras_formacoes_periciando');
+            //$this->db->like('nome_usuario', $busca, 'both');
+            $this->db->from('pericias_sisperjud');
+            $this->db->join('periciando', 'periciando.id = pericias_sisperjud.periciando_id', 'inner');
+        $this->db->where('pericias_sisperjud.id', $id);
+        $pericia = $this->db->get()->row();
+        return array('pericia' => $pericia);
     }
 }
 ?>

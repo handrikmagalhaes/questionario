@@ -62,7 +62,8 @@ function listarPericias(){
 								<td>'+pericia.numero_processo+'</td>\
 								<td class="text-center">\
 									<button class="btn btn-light btn-sm rounded-circle me-1" title="Excluir Perícia" onclick="excluirPericia('+pericia.id+')"><i class="fa-solid fa-trash text-danger"></i></button>\
-									<button class="btn btn-light btn-sm rounded-circle" title="Editar Perícia" onclick="editarPericia('+pericia.id+')" data-bs-toggle="modal" data-bs-target="#formPericiaModal"><i class="fa-solid fa-pen-to-square text-primary"></i></button>\
+									<button class="btn btn-light btn-sm rounded-circle me-1" title="Editar Perícia" data-bs-target="#formPericiaModal"><a href="edicao/?id='+pericia.id+'"><i class="fa-solid fa-pen-to-square text-primary"></i></a></button>\
+									<button class="btn btn-light btn-sm rounded-circle" title="Imprimir Perícia"><a href="relatorio/?id='+pericia.id+'"><i class="fa-solid fa-print text-primary"></i></a></button>\
 								</td>\
 							</tr>');
 		});
@@ -118,22 +119,6 @@ function excluirPericia(id) {
 	}
 }
 
-// Função de edição de perícias
-function editarPericia(id) {
-	$.get($("#url_base").text()+"sisperjud/buscar", { id: id }, function(data) {
-		// Preencher o formulário com os dados da perícia
-		var pericia = JSON.parse(data);
-		console.log(pericia.pericia.nome_periciando);
-		if (!pericia) {
-			toastr.error('Não foi possível carregar os dados da perícia.');
-			return;
-		}
-		$("#id_pericia").val(pericia.pericia.id);
-		$("#nome_periciando").val(pericia.pericia.nome_periciando);
-		$("#data_pericia").val(pericia.pericia.data_pericia);
-		$("#btnCadastrarPericia").text('Alterar');
-	});
-}
 
 $("#nascimento_periciando").on('blur', function() {
 	var dataNascimento = $(this).val(); // Formato YYYY-MM-DD
