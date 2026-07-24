@@ -21,21 +21,18 @@ $(document).ready(function() {
 	}
 	// Preenchendo os campos com a data de hoje
 	$("#data_pericia").val(today);
-	$("#data_conclusao").val(today);
     // Define o valor do input
     $('#id-do-seu-campo').val(today);
 	listarPericias();
-	carregaSelectRespostas();
+	//carregaSelectRespostas();
 	//Máscaras
 	$(".processo").mask("00000.000000/0000-00");
-	$(".cpf").mask("000.000.000-00");
-
 });
 
 function listarPericias(){
-	$.get($("#url_base").text()+"sisperjud/listar", function(data){
-		$("#tblSisperjud").empty(); //Apaga o conteúdo da tabela
-		$("#tblSisperjud").html('<thead>\
+	$.get($("#url_base").text()+"loas/listar", function(data){
+		$("#tblLoas").empty(); //Apaga o conteúdo da tabela
+		$("#tblLoas").html('<thead>\
                          		<tr class="py-3">\
 								<th class="ps-4">Nome do Periciando</th>\
 								<th>Data da Perícia</th>\
@@ -43,7 +40,7 @@ function listarPericias(){
 								<th class="text-center">Ações</th>\
                          		</tr>\
                      			</thead>\
-                     			<tbody id="corpoTblSisperjud"></tbody>');//Insere o conteúdo atualizado na tabela
+                     			<tbody id="corpoTblLoas"></tbody>');//Insere o conteúdo atualizado na tabela
 		var pericias = data.pericias || data;
 		console.log(pericias);
 		if (!$.isArray(pericias)) {
@@ -56,7 +53,7 @@ function listarPericias(){
 			const partes = dataPericia.split('-');
 			const dataFormatada = partes[2] + '/' + partes[1] + '/' + partes[0];
 			pericia.data_pericia = dataFormatada;
-			$("#corpoTblSisperjud").append('<tr>\
+			$("#corpoTblLoas").append('<tr>\
 								<td class="ps-4"><div class="fw-bold">'+pericia.nome_periciando+'</div><span class="small text-muted">ID: #'+pericia.id+'</span></td>\
 								<td>'+pericia.data_pericia+'</td>\
 								<td>'+pericia.numero_processo+'</td>\
@@ -70,33 +67,6 @@ function listarPericias(){
 	}, 'json');
 }
 
-$("#cpf_periciando").on('blur', function() {
-	var cpf = $(this).val();
-	if (cpf) {
-		$.get($("#url_base").text()+"periciando/buscar", { cpf: cpf }, function(data) {
-			if (data) {
-				//console.log(data);
-				$("#periciando_id").val(data.id);
-				$("#nome_periciando").val(data.nome_periciando);
-				$("#rg_periciando").val(data.rg_periciando);
-				$("#nascimento_periciando").val(data.nascimento_periciando);
-				$("#nome_social").val(data.nome_social_periciando);
-				$("#profissao").val(data.profissao_periciando);
-				$("#formacao").val(data.formacao_periciando);
-				$("#outras_formacoes").val(data.outras_formacoes_periciando);
-				$("#nascimento_periciando").trigger('blur'); // Atualiza a idade
-				// Preenche os radios de acordo com os valores retornados
-				$("input[name='sexo_biologico'][value='" + data.sexo_biologico_periciando + "']").prop('checked', true);
-				$("input[name='identidade_genero'][value='" + data.identidade_genero_periciando + "']").prop('checked', true);
-				$("input[name='raca'][value='" + data.raca_periciando + "']").prop('checked', true);
-				$("input[name='estado_civil'][value='" + data.estado_civil_periciando + "']").prop('checked', true);
-				$("input[name='grau_escolaridade'][value='" + data.grau_escolaridade_periciando + "']").prop('checked', true);
-				$("input[name='uf'][value='" + data.uf_periciando + "']").prop('checked', true);
-			}
-		}, 'json');
-	}
-});
-
 /*$('#formUsuarioModal').on('hidden.bs.modal', function () {
 	$("#usuarioForm")[0].reset();
 	$("#id_usuario").val('');
@@ -107,7 +77,7 @@ $("#cpf_periciando").on('blur', function() {
 // Função de exclusão de perícias
 function excluirPericia(id) {
 	if (confirm('Tem certeza que deseja excluir esta perícia?')) {
-		$.get($("#url_base").text()+"sisperjud/excluir", { id: id }, function(data) {
+		$.get($("#url_base").text()+"loas/excluir", { id: id }, function(data) {
 			console.log(data.excluiu);
 			if (data.excluiu) {
 				toastr.success('Perícia excluída com sucesso!');
@@ -120,15 +90,45 @@ function excluirPericia(id) {
 }
 
 
-$("#nascimento_periciando").on('blur', function() {
+$("#data_nascimento_periciando").on('blur', function() {
 	var dataNascimento = $(this).val(); // Formato YYYY-MM-DD
 	if (dataNascimento) {
 		var idade = calcularIdade(dataNascimento);
 		if (!isNaN(idade) && idade >= 0) {
 			$('#idade_periciando').val(idade);
+			// Habilita desabilita os campos dependendo da idade
+			let menor = "Não";
+			if (idade > 16){
+				$("#lesao").prop("disabled", false);
+				$("#impedimento_longo_prazo").prop("readonly", false);
+				$("#doenca_cronica").prop("readonly", false);
+				$("#exercer_atos").prop("readonly", false);
+				$("#exercicio_pleno").prop("readonly", false);
+				$("#permanentes_cuidados").prop("readonly", false);
+				$("#desenvolvimento_fisico_mental").prop("readonly", true);
+				$("#prejudica_exercicio_atividade").prop("readonly", true);
+				$("#esforco_fisico").prop("readonly", true);
+				$("#documento_escolar").prop("readonly", true);
+				$("#impedir_atividade").prop("readonly", true);
+			} else {
+				$("#lesao").prop("readonly", true);
+				$("#impedimento_longo_prazo").prop("readonly", true);
+				$("#doenca_cronica").prop("readonly", true);
+				$("#exercer_atos").prop("readonly", true);
+				$("#exercicio_pleno").prop("readonly", true);
+				$("#permanentes_cuidados").prop("readonly", true);
+				$("#desenvolvimento_fisico_mental").prop("readonly", false);
+				$("#prejudica_exercicio_atividade").prop("readonly", false);
+				$("#esforco_fisico").prop("readonly", false);
+				$("#documento_escolar").prop("readonly", false);
+				$("#impedir_atividade").prop("readonly", false);
+				menor = "Sim";
+			}
+			carregaSelectRespostas(menor);
 		} else {
 			$('#idade_periciando').val('');
 		}
+		
 	} else {
 		$('#idade_periciando').val('');
 	}
@@ -152,8 +152,8 @@ function calcularIdade(nascimento) {
 	return idade;
 }
 
-function carregaSelectRespostas() {
-	$.get($("#url_base").text() + "resposta/listar", {"tipo": "SISPERJUD"}, function(data) {
+function carregaSelectRespostas(tipoPericiando) {
+	$.get($("#url_base").text() + "resposta/listar", {"tipo": "LOAS", "menor": tipoPericiando}, function(data) {
 		$("#selectRespostas").empty('');
 		$.each(data.respostas, function(i, resposta){
 			$("#selectRespostas").append('<option value="' + resposta.id + '">' + resposta.resposta + '</option>');

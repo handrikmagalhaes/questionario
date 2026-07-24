@@ -321,17 +321,28 @@ class RespostaModel extends CI_model {
         }
     }
 
-    public function listar_respostas($tipo){
+    public function listar_respostas($tipo, $menor){
         if(!isset($_SESSION)){
             session_start();
         }
         if (isset($_SESSION['logado'])) {
 			//Usuarios Nativos
-            $this->db->select('*');
-            //$this->db->like('nome_usuario', $busca, 'both');
-            $this->db->from('resposta');
-            if ($tipo) {
+            if ($tipo === 'SISPERJUD') {
+                $this->db->select('*');
+                $this->db->from('resposta');
                 $this->db->where('tipo_pericia', $tipo);
+                $data['respostas'] = $this->db->get()->result();
+                return $data;
+            } else if ($tipo === 'LOAS') {
+                $this->db->select('*');
+                $this->db->from('resposta');
+                $this->db->where('tipo_pericia', $tipo);
+                if ($menor !== null) {
+                    $this->db->join('resposta_loas', 'resposta.id = resposta_loas.resposta_id');
+                    $this->db->where('resposta_loas.menor', $menor);
+                }
+                $data['respostas'] = $this->db->get()->result();
+                return $data;
             }
 			//$this->db->order_by($campo, $ord);
             //$this->db->limit($registros_por_pagina);

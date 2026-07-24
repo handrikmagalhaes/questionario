@@ -130,7 +130,13 @@ class Resposta extends CI_Controller {
 			} else {
 				$tipo = null;
 			}
-			$retorno = $resposta->listar_respostas($tipo);
+			if (isset($_GET['menor'])) {
+				$menor = $_GET['menor'];
+			} else {
+				$menor = null;
+			}
+
+			$retorno = $resposta->listar_respostas($tipo, $menor);
 			echo json_encode($retorno);
 		} else {
 			header('Location: '.base_url().'home');

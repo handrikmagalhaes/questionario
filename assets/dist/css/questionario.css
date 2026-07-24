@@ -33,6 +33,8 @@ body {
     background: radial-gradient(circle at top right, #eef2ff, #f8fafc);
     padding-top: 80px;
     background-image: url('../img/jfal.png');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .text-gradient {
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
