@@ -27,6 +27,7 @@ $(document).ready(function() {
 	//carregaSelectRespostas();
 	//Máscaras
 	$(".processo").mask("00000.000000/0000-00");
+	$(".cpf").mask("000.000.000-00");
 });
 
 function listarPericias(){
@@ -155,8 +156,9 @@ function calcularIdade(nascimento) {
 function carregaSelectRespostas(tipoPericiando) {
 	$.get($("#url_base").text() + "resposta/listar", {"tipo": "LOAS", "menor": tipoPericiando}, function(data) {
 		$("#selectRespostas").empty('');
+		$("#selectRespostas").append('<option value="">----------</option>');
 		$.each(data.respostas, function(i, resposta){
-			$("#selectRespostas").append('<option value="' + resposta.id + '">' + resposta.resposta + '</option>');
+			$("#selectRespostas").append('<option value="' + resposta.resposta_id + '">' + resposta.resposta + '</option>');
 		});
 	}, 'json');
 }
@@ -167,40 +169,9 @@ $("#selectRespostas").change(function() {
 			// Recebe JSON diretamente do servidor (dataType 'json' abaixo)
 			var resposta = data;
 			console.log(resposta);
-			$("#estado_clinico_exame").val(resposta.resposta.estado_clinico_exame);
-			$("#limitacoes_funcionais").val(resposta.resposta.limitacoes_funcionais);
-			if (resposta.resposta.lesao_fisica_mental == "Sim") {
-				$('input[name="lesao_fisica_mental"][value="Sim"]').prop('checked', true)	;
-			} else {
-				$('input[name="lesao_fisica_mental"][value="Não"]').prop('checked', true);
-			}
-			if (resposta.resposta.respondeu_sozinha == "Sim") {
-				$('input[name="respondeu_sozinha"][value="Sim"]').prop('checked', true)	;
-			} else {
-				$('input[name="respondeu_sozinha"][value="Não"]').prop('checked', true);
-			}
-			if (resposta.resposta.valores_atrasados == "Sim") {
-				$('input[name="valores_atrasados"][value="Sim"]').prop('checked', true)	;
-			} else {
-				$('input[name="valores_atrasados"][value="Não"]').prop('checked', true);
-			}
-			$("#informacoes_valores").val(resposta.resposta.informacoes_valores);
-			if (resposta.resposta.alteracao_incapacidade == "Sim") {
-				$('input[name="alteracao_incapacidade"][value="Sim"]').prop('checked', true)	;
-			} else if (resposta.resposta.alteracao_incapacidade == "Não") {
-				$('input[name="alteracao_incapacidade"][value="Não"]').prop('checked', true);
-			} else {
-				$('input[name="alteracao_incapacidade"][value="Não se aplica"]').prop('checked', true);
-			}
-			$("#informacoes_pos_pericia").val(resposta.resposta.informacoes_pos_pericia);
-			if (resposta.resposta.conclusao_laudo == "Sim") {
-				$('input[name="conclusao_laudo"][value="Sim"]').prop('checked', true)	;
-			} else {
-				$('input[name="conclusao_laudo"][value="Não"]').prop('checked', true);
-			}
-			$("#laudo_diverso").val(resposta.resposta.laudo_diverso);
-			$("#outros_esclarecimentos").val(resposta.resposta.outros_esclarecimentos);
-			$("#quesitos_adicionais").val(resposta.resposta.quesitos_adicionais);
+			$("#lesao").val(resposta.lesao);
+			$("#impedimento_longo_prazo").val(resposta.impedimento_longo_prazo);
+
 }, 'json');
 	}
 });

@@ -11,12 +11,12 @@
 	<div class="col-md-6 text-md-end">
 		<a href="{url_base}loas/lista" class="btn btn-secondary rounded-pill px-4">Voltar</a>
 	</div>
-	<form id="formLoas" method="post" enctype="multipart/form-data" action="<?php echo isset($dados['pericia']) ? base_url().'loas/alterar/'.$dados['pericia']->id : base_url().'loas/cadastrar'; ?>">
+	<form id="formLoas" method="post" enctype="multipart/form-data" action="<?php echo isset($dados['pericia']) ? base_url().'loas/alterar/?id='.$dados['pericia']->id : base_url().'loas/cadastrar'; ?>">
 		<input type="hidden" name="id_pericia" id="id_pericia" value="<?php echo isset($dados['pericia']) ? $dados['pericia']->id : ''; ?>">
 		<div class="accordion" id="accordionPanelsStayOpenExample">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne" readonly	>
 					<strong>1. DADOS DA PERÍCIA</strong>
 				</button>
 				</h2>
@@ -35,7 +35,7 @@
 						<div class="row g-3 mb-4">
 							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">Perito(a)</label>
-								<input type="text" name="perito" id="perito" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){echo $dados['pericia']->perito;} ?>">
+								<input type="text" name="medico_perito" id="medico_perito" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){echo $dados['pericia']->perito;} ?>">
 							</div>
 						</div>
 					</div>
@@ -244,47 +244,47 @@
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">1 - O Periciando é, ou já foi portador de doença, lesão ou deficiência física, mental ou sensorial (art.20, § 2º, da çlei 8.742/93)? Em caso positivo, qual(is)?</label>
-							<input type="text" name="lesao" id="lesao" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->lesao; } ?>">
+							<input type="text" name="lesao" id="lesao" class="form-control rounded-3 py-2" value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->lesao; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">2 - Essa doença, moléstia ou lesão gera impedimento de longo prazo (superior a 02 anos(, de natureza física, mental, intelectual ou sensorial, o qual, em interação com uma ou mais barreiras, pode obstruir sua participação plena e efetiva na sociedade em igualdade de condições com as demais pessoas (art. 20, § 2º, da Lei 8.742/93)?</label>
-							<input type="text" name="impedimento_longo_prazo" id="impedimento_longo_prazo" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->impedimento_longo_prazo; } ?>">
+							<input type="text" name="impedimento_longo_prazo" id="impedimento_longo_prazo" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->impedimento_longo_prazo; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">3 - O autor possui alguma doença infectocontagiosa e/ou crônica, cujos aspectos físicos visíveis possam dificultar a sua inserção no mercado de trabalho e/ou na sociedade em virtude da elevada estigmatização social da doença:</label>
-							<input type="text" name="doenca_cronica" id="doenca_cronica" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->doenca_cronica; } ?>">
+							<input type="text" name="doenca_cronica" id="doenca_cronica" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->doenca_cronica; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">4 - Essa doença, moléstia ou lesão impede o(a) periciando(a) de exercer plenamente os atos da vida civil (se pode conscientemente exprimir sua vontade, decidir e/ou praticar atos simples próprios da vida em sociedade, como, por exemplo, celebrar contratos, inscrever-se em vestibular/concurso público, casar-se, etc...)?</label>
-							<input type="text" name="exercer_atos" id="exercer_atos" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->exercer_atos; } ?>">
+							<input type="text" name="exercer_atos" id="exercer_atos" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->exercer_atos; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">5 - Havendo impedimento para o exercício pleno dos atos da vida civil (se afirmativa a resposa ao Quesito 4), ele é transitório ou permanente?</label>
-							<input type="text" name="exercicio_pleno" id="exercicio_pleno" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->exercicio_pleno; } ?>">
+							<input type="text" name="exercicio_pleno" id="exercicio_pleno" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->exercicio_pleno; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">6 - O(a) periciando(a) necessita de permanentes cuidados médicos, de enfermagem ou de terceiros? Em caso afirmativo, é possível estimar desde quando (dd/mm/aaaa)?</label>
-							<input type="text" name="permanentes_cuidados" id="permanentes_cuidados" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->permanentes_cuidados; } ?>">
+							<input type="text" name="permanentes_cuidados" id="permanentes_cuidados" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->permanentes_cuidados; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">1 - (Em caso de menores de 16 anos) A doença ou lesão prejudica o desenvolvimento físico, mental e/ou intelectual do(a) periciando(a)?</label>
-							<input type="text" name="desenvolvimento_fisico_mental" id="desenvolvimento_fisico_mental" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->desenvolvimento_fisico_mental; } ?>">
+							<input type="text" name="desenvolvimento_fisico_mental" id="desenvolvimento_fisico_mental" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->desenvolvimento_fisico_mental; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">2 - (Em caso de menores de 16 anos) A doença ou lesão torna o(a) periciando(a) incapaz ou <b>prejudica significativamente</b> o exercício de atividades inerentes a idade, tais como estudar, brincar, praticar esportes, divertir-se, etc. (art. 16, inciso IV do ECA), na mesma intensidade de uma criança em pleno gozo da sua saúde?</label>
-							<input type="text" name="prejudica_exercicio_atividade" id="prejudica_exercicio_atividade" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->prejudica_exercicio_atividade; } ?>">
+							<input type="text" name="prejudica_exercicio_atividade" id="prejudica_exercicio_atividade" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->prejudica_exercicio_atividade; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">3 - (Em caso de menores de 16 anos) O exercício de atividades que demandem esforços físicos pode acarretar o agravamento/piora do quadro clínico do(a) periciando(a)?</label>
-							<input type="text" name="esforco_fisico" id="esforco_fisico" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->esforco_fisico; } ?>">
+							<input type="text" name="esforco_fisico" id="esforco_fisico" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->esforco_fisico; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">4 - (Em caso de menores de 16 anos) Foi apresentado algum relatório ou documento escolar relativo ao periciando(a)? Em caso positivo, houve a descrição de algum comportamento atípico ou necessidade de atenção especial em relação às outras crianças/adolescentes da mesma faixa etária? Essa descrição coaduna com o exame realizado por ocasião da perícia?</label>
-							<input type="text" name="documento_escolar" id="documento_escolar" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->documento_escolar; } ?>">
+							<input type="text" name="documento_escolar" id="documento_escolar" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->documento_escolar; } ?>">
 						</div>
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">5 - (Em caso de menores de 16 anos) A condição de saúde do menor é determinante para impedir o exercício de atividade laboral por seus pais e/ou responsáveis, obstaculizando o sustento familiar?</label>
-							<input type="text" name="impedir_atividade" id="impedir_atividade" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->impedir_atividade; } ?>">
+							<input type="text" name="impedir_atividade" id="impedir_atividade" class="form-control rounded-3 py-2"  value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->impedir_atividade; } ?>">
 						</div>
 
 					</div>
@@ -396,7 +396,7 @@
 							</div>
 							<div class="col-8 col-md-4">
 								<label class="form-label small fw-bold">Data de cessação do impedimento (se aplicável)</label>
-								<input type="date" name="data_cessacao_impedimento" id="data_cessacao_impedimento" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->data_cessacao_impedimento; } ?>">
+								<input type="date" name="data_cessacao_impedimento" id="data_cessacao_impedimento" class="form-control rounded-3 py-2" value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->data_cessacao_impedimento; } ?>">
 							</div>
 
 						</div>
@@ -412,17 +412,14 @@
 				<div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
 					<div class="accordion-body">
 						<div class="row g-3 mb-4">
-							<div class="col-24 col-md-12">
-								<label class="form-label small fw-bold d-block mb-2 text-justify">COMPLEMENTAÇÃO</label>
+							<div class="col-12 col-md-6">
+								<label class="form-label small fw-bold">Complementação</label>
+								<input type="text" name="complementacao" id="complementacao" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->complementacao; } ?>">
 							</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<label class="form-label small fw-bold">Complementação</label>
-							<input type="text" name="complementacao" id="complementacao" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->complementacao; } ?>">
-						</div>
-						<div class="col-12 col-md-6">
-							<label class="form-label small fw-bold">Médico(a) Perito(a) Judicial</label>
-							<input type="text" name="medico_judicial" id="medico_judicial" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->medico_judicial; } ?>">
+							<div class="col-12 col-md-6">
+								<label class="form-label small fw-bold">Médico(a) Perito(a) Judicial</label>
+								<input type="text" name="medico_judicial" id="medico_judicial" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->medico_judicial; } ?>">
+							</div>
 						</div>
 					</div>
 				</div>

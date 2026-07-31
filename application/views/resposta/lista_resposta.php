@@ -381,37 +381,37 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">1 - O periciando é, ou já foi portador de doença, lesão ou deficiência física, mental, intelectual ou sensorial (art. 20, &sect;2º, da Lei nº 8.742/93)? Em caso positivo, qual(is)?</label>
-                                                    <textarea name="portador_lesao_deficiencia" id="portador_lesao_deficiencia" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="lesao" id="lesao" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">2 - Essa doença, moléstia ou lesão gera impedimento de longo prazo (superior à 02 anos), de natureza física, mental, intelectual ou sensorial, o qual, em interação com uma ou mais barreiras, pode obstruir sua participação plena e efetiva na sociedade em igualdade de condições com as demais pessoas (art. 20, &sect;2º, da Lei nº 8.742/93)?</label>
-                                                    <textarea name="molestia_lesao" id="molestia_lesao" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="impedimento_longo_prazo" id="impedimento_longo_prazo" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">3 - O autor possui alguma doença infectocontagiosa e/ou crônica, cujos aspectos físicos visíveis possam dificultar a sua inserção no mercado de trabalho e/ou na sociedade em virtude da elevada estigmatização social da doença:</label>
-                                                    <textarea name="doenca_infectocontagiosa" id="doenca_infectocontagiosa" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="doenca_cronica" id="doenca_cronica" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">4 - Essa doença, moléstia ou lesão impede o(a) periciando(a) de exercer plenamente os atos da vida civil (se pode, conscientemente exprimir sua vontade, decidir e/ou praticar atos simples próprios da vida em sociedade, como, por exemplo, celebrar contratos, inscrever-se em vestibular/concurso público, casar-se, etc.)?</label>
-                                                    <textarea name="exercer_plenamente" id="exercer_plenamente" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="exercer_atos" id="exercer_atos" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">5 - Havendo impedimento para o exercício pleno dos atos da vida civil (se afirmativa a resposta ao Quesito 4), ele é transitório ou permanente?</label>
-                                                    <textarea name="impedimento_transitorio_permanente" id="impedimento_transitorio_permanente" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="exercicio_pleno" id="exercicio_pleno" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">6 - O(a) periciando(a) necessita de permanente cuidados médicos, de enfermagem ou de terceiros? Em caso afirmativo, é possível estimar desde quando (dd/mm/aaaa)?</label>
-                                                    <textarea name="cuidados_medicos" id="cuidados_medicos" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="permanentes_cuidados" id="permanentes_cuidados" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -428,19 +428,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">1 - A doença ou lesão prejudica o desenvolvimento físico, mental e/ou intelectual do(a) periciando(a)?</label>
-                                                    <textarea name="prejudica_desenvolvimento" id="prejudica_desenvolvimento" class="form-control rounded-3 py-2" ></textarea>
+                                                    <textarea name="desenvolvimento_fisico_mental" id="desenvolvimento_fisico_mental" class="form-control rounded-3 py-2" ></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">2 - A doença ou lesão torna o(a) periciando(a) incapaz ou prejudica significativamente o exercício de atividades inerentes a idade, tais como estudar, brincar, praticar esportes, divertir-se, etc. (artigo 16, inciso IV, do ECA), na mesma intensidade de uma criança em pleno gozo de sua saúde?</label>
-                                                    <textarea name="prejudica_atividades" id="prejudica_atividades" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="prejudica_exercicio_atividade" id="prejudica_exercicio_atividade" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">3 - O exercício de atividades que demandam esforços físicos pode acarretar o agravamento/piora do quadro clínico do(a) periciando(a)?</label>
-                                                    <textarea name="quadro_clinico" id="quadro_clinico" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="esforco_fisico" id="esforco_fisico" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mb-4">
@@ -452,7 +452,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="row g-3 mb-4">
                                                 <div class="col-24 col-md-12">
                                                     <label class="form-label small fw-bold">5 - A condição de saúde do menor é fator determinante para impedir o exercício de atividade laboral por seus pais e/ou responsáveis, obstaculizando o sustento familiar?</label>
-                                                    <textarea name="sustento_familiar" id="sustento_familiar" class="form-control rounded-3 py-2"></textarea>
+                                                    <textarea name="impedir_atividade" id="impedir_atividade" class="form-control rounded-3 py-2"></textarea>
                                                 </div>
                                             </div>
                                         </div>
