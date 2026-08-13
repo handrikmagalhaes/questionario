@@ -70,7 +70,6 @@ $("#respostaSISPERJUDForm").submit(function(e){
 	if ($("#id_resposta_sisperjud").val() !== "") {
 		// Edição de resposta
 		$.post($("#url_base").text()+"resposta/alterar", $(this).serialize(), function(data){
-			console.log(data);
 			if (data.alterou === true) {
 				toastr.success('Resposta alterada com sucesso!');
 				$("#formRespostaModal").modal('hide');
@@ -107,7 +106,6 @@ $("#respostaLOASForm").submit(function(e){
 	if ($("#id_resposta_loas").val() !== "") {
 		// Edição de resposta
 		$.post($("#url_base").text()+"resposta/alterar", $(this).serialize(), function(data){
-			console.log(data);
 			if (data.alterou === true) {
 				toastr.success('Resposta alterada com sucesso!');
 				$("#formRespostaModal").modal('hide');
@@ -123,6 +121,7 @@ $("#respostaLOASForm").submit(function(e){
 	} else if ($("#id_resposta_loas").val() === "") {
 		// Cadastro de resposta
 		$.post($("#url_base").text()+"resposta/cadastrar", $(this).serialize(), function(data){
+			console.log(data);
 			if (data.inseriu === true) {
 				toastr.success('Resposta cadastrada com sucesso!');
 				$("#formRespostaModal").modal('hide');

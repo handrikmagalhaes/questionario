@@ -125,18 +125,7 @@ class Resposta extends CI_Controller {
 		if(isset($_SESSION['logado'])){
 			$this->load->model('RespostaModel');
 			$resposta = new RespostaModel;
-			if (isset($_GET['tipo'])) {
-				$tipo = $_GET['tipo'];
-			} else {
-				$tipo = null;
-			}
-			if (isset($_GET['menor'])) {
-				$menor = $_GET['menor'];
-			} else {
-				$menor = null;
-			}
-
-			$retorno = $resposta->listar_respostas($tipo, $menor);
+			$retorno = $resposta->listar_respostas();
 			echo json_encode($retorno);
 		} else {
 			header('Location: '.base_url().'home');

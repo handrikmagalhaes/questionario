@@ -63,14 +63,14 @@ function listarPericias(){
 								<td class="text-center">\
 									<button class="btn btn-light btn-sm rounded-circle me-1" title="Excluir Perícia" onclick="excluirPericia('+pericia.id+')"><i class="fa-solid fa-trash text-danger"></i></button>\
 									<button class="btn btn-light btn-sm rounded-circle me-1" title="Editar Perícia" data-bs-target="#formPericiaModal"><a href="edicao/?id='+pericia.id+'"><i class="fa-solid fa-pen-to-square text-primary"></i></a></button>\
-									<button class="btn btn-light btn-sm rounded-circle" title="Imprimir Perícia"><a href="relatorio/?id='+pericia.id+'"><i class="fa-solid fa-print text-primary"></i></a></button>\
+									<button class="btn btn-light btn-sm rounded-circle" title="Imprimir Perícia"><a href="relatorio/?id='+pericia.id+'" target="_blank"><i class="fa-solid fa-print text-primary"></i></a></button>\
 								</td>\
 							</tr>');
 		});
 	}, 'json');
 }
 
-$("#cpf_periciando").on('blur', function() {
+/*$("#cpf_periciando").on('blur', function() {
 	var cpf = $(this).val();
 	if (cpf) {
 		$.get($("#url_base").text()+"periciando/buscar", { cpf: cpf }, function(data) {
@@ -95,7 +95,7 @@ $("#cpf_periciando").on('blur', function() {
 			}
 		}, 'json');
 	}
-});
+});*/
 
 /*$('#formUsuarioModal').on('hidden.bs.modal', function () {
 	$("#usuarioForm")[0].reset();
@@ -154,8 +154,10 @@ function calcularIdade(nascimento) {
 
 function carregaSelectRespostas() {
 	$.get($("#url_base").text() + "resposta/listar", {"tipo": "SISPERJUD"}, function(data) {
+		console.log(data);
 		$("#selectRespostas").empty('');
-		$.each(data.respostas, function(i, resposta){
+		$("#selectRespostas").append('<option value="">Selecione uma resposta</option>');
+		$.each(data, function(i, resposta){
 			$("#selectRespostas").append('<option value="' + resposta.id + '">' + resposta.resposta + '</option>');
 		});
 	}, 'json');
@@ -166,8 +168,8 @@ $("#selectRespostas").change(function() {
 		$.get($("#url_base").text() + "resposta/buscar", {"id": $(this).val()}, function(data) {
 			// Recebe JSON diretamente do servidor (dataType 'json' abaixo)
 			var resposta = data;
-			console.log(resposta);
-			$("#estado_clinico_exame").val(resposta.resposta.estado_clinico_exame);
+			//console.log(resposta);
+			$("#estado_clinico").val(resposta.resposta.estado_clinico);
 			$("#limitacoes_funcionais").val(resposta.resposta.limitacoes_funcionais);
 			if (resposta.resposta.lesao_fisica_mental == "Sim") {
 				$('input[name="lesao_fisica_mental"][value="Sim"]').prop('checked', true)	;

@@ -24,19 +24,22 @@ class RespostaModel extends CI_model {
                     $resposta['resposta_id'] = $id_resposta;
                     unset($resposta['resposta']);
                     unset($resposta['tipo_pericia']);
-                    if ($resposta['tipo_pericia'] === 'SISPERJUD') {
+                    unset($resposta['id']);
+                    // Inserindo os dados específicos na tabela correspondente
+                    if ($respostaHead['tipo_pericia'] === 'SISPERJUD') {
                         if ($this->db->insert('resposta_sisperjud', $resposta)) {
                             $retorno['inseriu'] = true;
                         }
-                    } else if ($resposta['tipo_pericia'] === 'LOAS') {
+                    } else if ($respostaHead['tipo_pericia'] === 'LOAS') {
                         if ($this->db->insert('resposta_loas', $resposta)) {
                             $retorno['inseriu'] = true;
                         }
                     }
+                    return $retorno;
                 }
             }
-            header('Location: '.base_url().'login');
         }
+        header('Location: '.base_url().'login');
     }
 
     public function alterar_resposta($respostaData){
@@ -202,7 +205,7 @@ class RespostaModel extends CI_model {
         }
     }
 
-    public function listar_respostas($tipo, $menor){
+    public function listar_respostas(){
         if(!isset($_SESSION)){
             session_start();
         }

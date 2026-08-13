@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require_once BASEPATH . 'third_party/fpdf/fpdf.php';
+require_once APPPATH . 'third_party/fpdf/fpdf.php';
 
 class Pdf extends FPDF {
 
     function Header()
     {
         // Logo
-        $this->Image('../assets/dist/img/jfal2.png', 88, 10, 30);
+        $this->Image(base_url().'/assets/dist/img/jfal2.png', 88, 10, 30);
         $this->SetXY(90, 27);
         // Arial bold 15
         $this->SetFont('Arial', 'B', 15);

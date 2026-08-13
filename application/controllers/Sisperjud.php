@@ -130,61 +130,22 @@ class Sisperjud extends CI_Controller {
 			// Realizando higienização dos dados recebidos do formulário
 			$dados = array_map('strip_tags', $_POST);
 			$dados = array_map('stripslashes', $dados);
+			// Retirando o campo id_pericia do array de dados, caso exista, para evitar problemas na inserção
+			unset($dados['id_pericia']);
+			unset($dados['periciando_id']);
 			//echo "<pre>"; var_dump($dados); echo "</pre>";
 			//exit;
-			if ($dados['periciando_id'] == 0){
-				$dadosPericiando = array(
-					'nome_periciando' => $dados['nome_periciando'],
-					'cpf_periciando' => $dados['cpf_periciando'],
-					'rg_periciando' => $dados['rg_periciando'],
-					'nascimento_periciando' => $dados['nascimento_periciando'],
-					'nome_social_periciando' => $dados['nome_social'],
-					'sexo_biologico_periciando' => $dados['sexo_biologico'],
-					'identidade_genero_periciando' => $dados['identidade_genero'],
-					'raca_periciando' => $dados['raca'],
-					'estado_civil_periciando' => $dados['estado_civil'],
-					'grau_escolaridade_periciando' => $dados['grau_escolaridade'],
-					'profissao_periciando' => $dados['profissao'],
-					'uf_periciando' => $dados['uf'],
-					'formacao_periciando' => $dados['formacao'],
-					'outras_formacoes_periciando' => $dados['outras_formacoes'],
-				);
-				$this->load->model('PericiandoModel');
-				$periciando = new PericiandoModel;
-				$retorno = $periciando->cadastrar_periciando($dadosPericiando);
+			$this->load->model('SisperjudModel');
+			$sisperjud = new SisperjudModel;
+			$retorno = $sisperjud->cadastrar_sisperjud($dados);
+			if ($retorno){
+				$_SESSION['msg'] = "Perícia cadastrada com sucesso!";
+				$_SESSION['tipo'] = "success";
+				header('Location: '.base_url().'sisperjud/lista');
 			} else {
-				//limpando dados não utilizados para cadastro de pericia
-				unset($dados['id_pericia']);
-				unset($dados['nome_periciando']);
-				unset($dados['cpf_periciando']);
-				unset($dados['rg_periciando']);
-				unset($dados['nascimento_periciando']);
-				unset($dados['nome_social']);
-				unset($dados['sexo_biologico']);
-				unset($dados['identidade_genero']);
-				unset($dados['raca']);
-				unset($dados['estado_civil']);
-				unset($dados['grau_escolaridade']);
-				unset($dados['profissao']);
-				unset($dados['uf']);
-				unset($dados['formacao']);
-				unset($dados['outras_formacoes']);
-				unset($dados['titulo_anexo']);
-				unset($dados['arquivo_anexo']);
-				$dados['periciando_id'] = $dados['periciando_id'];
-
-				$this->load->model('SisperjudModel');
-				$sisperjud = new SisperjudModel;
-				$retorno = $sisperjud->cadastrar_sisperjud($dados);
-				if ($retorno){
-					$_SESSION['msg'] = "Perícia cadastrada com sucesso!";
-					$_SESSION['tipo'] = "success";
-					header('Location: '.base_url().'sisperjud/lista');
-				} else {
-					$_SESSION['msg'] = "Erro ao cadastrar a perícia!";
-					$_SESSION['tipo'] = "error";
-					header('Location: '.base_url().'sisperjud/lista');
-				}
+				$_SESSION['msg'] = "Erro ao cadastrar a perícia!";
+				$_SESSION['tipo'] = "error";
+				header('Location: '.base_url().'sisperjud/lista');
 			}
 		} else {
 			header('Location: '.base_url().'sisperjud/login');
@@ -198,28 +159,6 @@ class Sisperjud extends CI_Controller {
 		if(isset($_SESSION['logado'])){
 			$dados = array_map('strip_tags', $_POST);
 			$dados = array_map('stripcslashes', $dados);
-
-			// Limpando array de dados não utilizados para alteração de pericia
-				$idPericia = $dados['id_pericia'];
-				unset($dados['id_pericia']);
-				unset($dados['nome_periciando']);
-				unset($dados['cpf_periciando']);
-				unset($dados['rg_periciando']);
-				unset($dados['nascimento_periciando']);
-				unset($dados['nome_social']);
-				unset($dados['sexo_biologico']);
-				unset($dados['identidade_genero']);
-				unset($dados['raca']);
-				unset($dados['estado_civil']);
-				unset($dados['grau_escolaridade']);
-				unset($dados['profissao']);
-				unset($dados['uf']);
-				unset($dados['formacao']);
-				unset($dados['outras_formacoes']);
-				unset($dados['titulo_anexo']);
-				unset($dados['arquivo_anexo']);
-				$dados['id'] = $idPericia;
-
 			$this->load->model('SisperjudModel');
 			$sisperjud = new SisperjudModel;
 			$retorno = $sisperjud->alterar_sisperjud($dados);

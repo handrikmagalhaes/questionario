@@ -43,11 +43,10 @@ class SisperjudModel extends CI_model {
         }
         if (isset($_SESSION['logado'])) {
 			//Usuarios Nativos
-            $this->db->select('periciando.nome_periciando, pericias_sisperjud.data_pericia, pericias_sisperjud.numero_processo, pericias_sisperjud.id');
+            $this->db->select('nome_periciando, data_pericia, numero_processo,id');
             //$this->db->like('nome_usuario', $busca, 'both');
             $this->db->from('pericias_sisperjud');
-            $this->db->join('periciando', 'periciando.id = pericias_sisperjud.periciando_id', 'inner');
-			$this->db->order_by('periciando.nome_periciando', 'ASC');
+			$this->db->order_by('nome_periciando', 'ASC');
             //$this->db->limit($registros_por_pagina);
             //$this->db->offset((($pagina - 1) * $registros_por_pagina));
             $data['pericias'] = $this->db->get()->result();
@@ -112,10 +111,9 @@ class SisperjudModel extends CI_model {
         if(!isset($_SESSION)){
             session_start();
         }
-            $this->db->select('pericias_sisperjud.*, periciando.nome_periciando, periciando.cpf_periciando, periciando.rg_periciando, periciando.nascimento_periciando, periciando.nome_social_periciando, periciando.sexo_biologico_periciando, periciando.identidade_genero_periciando, periciando.raca_periciando, periciando.estado_civil_periciando, periciando.grau_escolaridade_periciando, periciando.profissao_periciando, periciando.uf_periciando, periciando.formacao_periciando, periciando.outras_formacoes_periciando');
+            $this->db->select('*');
             //$this->db->like('nome_usuario', $busca, 'both');
             $this->db->from('pericias_sisperjud');
-            $this->db->join('periciando', 'periciando.id = pericias_sisperjud.periciando_id', 'inner');
         $this->db->where('pericias_sisperjud.id', $id);
         $pericia = $this->db->get()->row();
         return array('pericia' => $pericia);

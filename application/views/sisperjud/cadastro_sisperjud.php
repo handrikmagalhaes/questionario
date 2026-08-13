@@ -150,7 +150,7 @@
 						<div class="row g-3 mb-4">
 							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">Nome social</label>
-								<input type="text" name="nome_social" id="nome_social" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){echo $dados['pericia']->nome_social_periciando;} ?>">
+								<input type="text" name="nome_social" id="nome_social" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){echo $dados['pericia']->nome_social;} ?>">
 							</div>
 						</div>
 						<div class="row g-3 mb-4">
@@ -158,19 +158,19 @@
 								<label class="form-label small fw-bold d-block mb-2 text-justify">Sexo Biológico</label>
 								<div class="d-flex gap-3 flex-wrap">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="sexo_biologico" id="sexo_biologico_feminino" value="Feminino" <?php if(isset($dados['pericia']) && $dados['pericia']->sexo_biologico_periciando == 'Feminino'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="sexo_biologico" id="sexo_biologico_feminino" value="Feminino" <?php if(isset($dados['pericia']) && $dados['pericia']->sexo_biologico == 'Feminino'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="sexo_biologico_feminino">
 											Feminino
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="sexo_biologico" id="sexo_biologico_masculino" value="Masculino" <?php if(isset($dados['pericia']) && $dados['pericia']->sexo_biologico_periciando == 'Masculino'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="sexo_biologico" id="sexo_biologico_masculino" value="Masculino" <?php if(isset($dados['pericia']) && $dados['pericia']->sexo_biologico == 'Masculino'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="sexo_biologico_masculino">
 											Masculino
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="sexo_biologico" id="sexo_biologico_intersexo" value="Intersexo" <?php if(isset($dados['pericia']) && $dados['pericia']->sexo_biologico_periciando == 'Intersexo'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="sexo_biologico" id="sexo_biologico_intersexo" value="Intersexo" <?php if(isset($dados['pericia']) && $dados['pericia']->sexo_biologico == 'Intersexo'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="sexo_biologico_intersexo">
 											Intersexo
 										</label>
@@ -181,61 +181,61 @@
 								<label class="form-label small fw-bold d-block mb-2 text-justify">Identidade de gênero</label>
 								<div class="d-flex gap-3 flex-wrap">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_mulher_cisgenero" value="Mulher Cisgênerio" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Mulher Cisgênerio'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_mulher_cisgenero" value="Mulher Cisgênerio" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Mulher Cisgênerio'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_mulher_cisgenero">
 											Mulher Cisgênerio
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_mulher_trangenero" value="Mulher Transgênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Mulher Transgênero'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_mulher_trangenero" value="Mulher Transgênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Mulher Transgênero'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_mulher_trangenero">
 											Mulher Transgênero
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_homem_cisgenero" value="Homem Cisgênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Homem Cisgênero'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_homem_cisgenero" value="Homem Cisgênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Homem Cisgênero'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_homem_cisgenero">
 											Homem Cisgênero
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_homem_trangenero" value="Homem Transgênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Homem Transgênero'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_homem_trangenero" value="Homem Transgênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Homem Transgênero'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_homem_trangenero">
 											Homem Transgênero
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_genero_nao_binario" value="Gênero não-binário" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Gênero não-binário'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_genero_nao_binario" value="Gênero não-binário" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Gênero não-binário'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_genero_nao_binario">
 											Gênero não-binário
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_agenero" value="Agênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Agênero'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_agenero" value="Agênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Agênero'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_agenero">
 											Agênero
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_genero_fluido" value="Gênero fluido" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Gênero fluido'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_genero_fluido" value="Gênero fluido" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Gênero fluido'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_genero_fluido">
 											Gênero fluido
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_bigenero" value="Bigênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Bigênero'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_bigenero" value="Bigênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Bigênero'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_bigenero">
 											Bigênero
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_mulher_transexual" value="Mulher Transgênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Mulher Transgênero'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_mulher_transexual" value="Mulher Transgênero" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Mulher Transgênero'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_mulher_transexual">
 											Mulher Transexual
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_nao_informado" value="Não Informado" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero_periciando == 'Não Informado'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="identidade_genero" id="identidade_genero_nao_informado" value="Não Informado" <?php if(isset($dados['pericia']) && $dados['pericia']->identidade_genero == 'Não Informado'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="identidade_genero_nao_informado">
 											Não deseja informar
 										</label>
@@ -248,37 +248,37 @@
 								<label class="form-label small fw-bold d-block mb-2 text-justify">Raça (autodeclaratório)</label>
 								<div class="d-flex gap-3 flex-wrap">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="raca" id="raca_amarela" value="Amarela" <?php if(isset($dados['pericia']) && $dados['pericia']->raca_periciando == 'Amarela'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="raca" id="raca_amarela" value="Amarela" <?php if(isset($dados['pericia']) && $dados['pericia']->raca == 'Amarela'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="raca_amarela">
 											Amarela
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="raca" id="raca_branca" value="Branca" <?php if(isset($dados['pericia']) && $dados['pericia']->raca_periciando == 'Branca'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="raca" id="raca_branca" value="Branca" <?php if(isset($dados['pericia']) && $dados['pericia']->raca == 'Branca'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="raca_branca">
 											Branca
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="raca" id="raca_preta" value="Preta" <?php if(isset($dados['pericia']) && $dados['pericia']->raca_periciando == 'Preta'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="raca" id="raca_preta" value="Preta" <?php if(isset($dados['pericia']) && $dados['pericia']->raca == 'Preta'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="raca_preta">
 											Preta
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="raca" id="raca_parda" value="Parda" <?php if(isset($dados['pericia']) && $dados['pericia']->raca_periciando == 'Parda'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="raca" id="raca_parda" value="Parda" <?php if(isset($dados['pericia']) && $dados['pericia']->raca == 'Parda'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="raca_parda">
 											Parda
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="raca" id="raca_indigena" value="Indígena" <?php if(isset($dados['pericia']) && $dados['pericia']->raca_periciando == 'Indígena'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="raca" id="raca_indigena" value="Indígena" <?php if(isset($dados['pericia']) && $dados['pericia']->raca == 'Indígena'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="raca_indigena">
 											Indígena
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="raca" id="raca_nao_informado" value="Não Informado" <?php if(isset($dados['pericia']) && $dados['pericia']->raca_periciando == 'Não Informado'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="raca" id="raca_nao_informado" value="Não Informado" <?php if(isset($dados['pericia']) && $dados['pericia']->raca == 'Não Informado'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="raca_nao_informado">
 											Não deseja informar
 										</label>
@@ -289,43 +289,43 @@
 								<label class="form-label small fw-bold d-block mb-2 text-justify">Estado civil</label>
 								<div class="d-flex gap-3 flex-wrap">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_solteiro" value="Solteiro(a)" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil_periciando == 'Solteiro(a)'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_solteiro" value="Solteiro(a)" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil == 'Solteiro(a)'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="estado_civil_solteiro">
 											Solteiro(a)
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_casado" value="Casado(a)" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil_periciando == 'Casado(a)'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_casado" value="Casado(a)" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil == 'Casado(a)'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="estado_civil_casado">
 											Casado(a)
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_uniao_estavel" value="União Estável" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil_periciando == 'União Estável'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_uniao_estavel" value="União Estável" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil == 'União Estável'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="estado_civil_uniao_estavel">
 											União Estável
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_separado_judicialmente" value="Separado(a) judicialmente" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil_periciando == 'Separado(a) judicialmente'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_separado_judicialmente" value="Separado(a) judicialmente" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil == 'Separado(a) judicialmente'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="estado_civil_separado_judicialmente">
 											Separado(a) judicialmente
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_divorciado" value="Divorciado(a)" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil_periciando == 'Divorciado(a)'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_divorciado" value="Divorciado(a)" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil == 'Divorciado(a)'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="estado_civil_divorciado">
 											Divorciado(a)
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_viuvo" value="Viúvo(a)" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil_periciando == 'Viúvo(a)'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_viuvo" value="Viúvo(a)" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil == 'Viúvo(a)'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="estado_civil_viuvo">
 											Viúvo(a)
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_nao_informado" value="Não Informado" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil_periciando == 'Não Informado'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="estado_civil" id="estado_civil_nao_informado" value="Não Informado" <?php if(isset($dados['pericia']) && $dados['pericia']->estado_civil == 'Não Informado'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="estado_civil_nao_informado">
 											Não deseja informar
 										</label>
@@ -338,43 +338,43 @@
 								<label class="form-label small fw-bold d-block mb-2 text-justify">Grau de escolaridade</label>
 								<div class="d-flex gap-3 flex-wrap">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_sem_escolaridade" value="Sem escolaridade" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade_periciando == 'Sem escolaridade'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_sem_escolaridade" value="Sem escolaridade" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade == 'Sem escolaridade'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="grau_escolaridade_sem_escolaridade">
 											Sem escolaridade
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_ef_incompleto" value="Ensino Fundamental Incompleto" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade_periciando == 'Ensino Fundamental Incompleto'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_ef_incompleto" value="Ensino Fundamental Incompleto" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade == 'Ensino Fundamental Incompleto'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="grau_escolaridade_ef_incompleto">
 											Ensino Fundamental Incompleto
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_ef_completo" value="Ensino Fundamental Completo" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade_periciando == 'Ensino Fundamental Completo'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_ef_completo" value="Ensino Fundamental Completo" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade == 'Ensino Fundamental Completo'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="grau_escolaridade_ef_completo">
 											Ensino Fundamental Completo
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_em_incompleto" value="Ensino Médio Incompleto" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade_periciando == 'Ensino Médio Incompleto'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_em_incompleto" value="Ensino Médio Incompleto" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade == 'Ensino Médio Incompleto'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="grau_escolaridade_em_incompleto">
 											Ensino Médio Incompleto
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_em_completo" value="Ensino Médio Completo" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade_periciando == 'Ensino Médio Completo'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_em_completo" value="Ensino Médio Completo" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade == 'Ensino Médio Completo'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="grau_escolaridade_em_completo">
 											Ensino Médio Completo
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_ensino_superior_incompleto" value="Ensino Superior Incompleto" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade_periciando == 'Ensino Superior Incompleto'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_ensino_superior_incompleto" value="Ensino Superior Incompleto" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade == 'Ensino Superior Incompleto'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="grau_escolaridade_ensino_superior_incompleto">
 											Ensino Superior Incompleto
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_ensino_superior_completo" value="Ensino Superior Completo" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade_periciando == 'Ensino Superior Completo'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="grau_escolaridade" id="grau_escolaridade_ensino_superior_completo" value="Ensino Superior Completo" <?php if(isset($dados['pericia']) && $dados['pericia']->grau_escolaridade == 'Ensino Superior Completo'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="grau_escolaridade_ensino_superior_completo">
 											Ensino Superior Completo
 										</label>
@@ -385,163 +385,163 @@
 								<label class="form-label small fw-bold d-block mb-2 text-justify">UF</label>
 								<div class="d-flex gap-3 flex-wrap">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_ac" value="AC" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'AC'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_ac" value="AC" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'AC'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_ac">
 											AC
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_al" value="AL" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'AL'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_al" value="AL" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'AL'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_al">
 											AL
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_am" value="AM" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'AM'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_am" value="AM" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'AM'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_am">
 											AM
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_ap" value="AP" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'AP'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_ap" value="AP" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'AP'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_ap">
 											AP
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_ba" value="BA" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'BA'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_ba" value="BA" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'BA'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_ba">
 											BA
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_ce" value="CE" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'CE'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_ce" value="CE" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'CE'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_ce">
 											CE
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_df" value="DF" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'DF'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_df" value="DF" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'DF'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_df">
 											DF
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_es" value="ES" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'ES'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_es" value="ES" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'ES'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_es">
 											ES
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_go" value="GO" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'GO'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_go" value="GO" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'GO'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_go">
 											GO
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_ma" value="MA" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'MA'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_ma" value="MA" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'MA'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_ma">
 											MA
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_mt" value="MT" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'MT'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_mt" value="MT" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'MT'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_mt">
 											MT
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_ms" value="MS" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'MS'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_ms" value="MS" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'MS'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_ms">
 											MS
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_mg" value="MG" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'MG'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_mg" value="MG" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'MG'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_mg">
 											MG
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_pa" value="PA" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'PA'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_pa" value="PA" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'PA'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_pa">
 											PA
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_pb" value="PB" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'PB'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_pb" value="PB" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'PB'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_pb">
 											PB
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_pr" value="PR" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'PR'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_pr" value="PR" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'PR'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_pr">
 											PR
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_pe" value="PE" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'PE'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_pe" value="PE" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'PE'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_pe">
 											PE
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_pi" value="PI" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'PI'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_pi" value="PI" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'PI'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_pi">
 											PI
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_rj" value="RJ" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'RJ'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_rj" value="RJ" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'RJ'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_rj">
 											RJ
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_rn" value="RN" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'RN'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_rn" value="RN" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'RN'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_rn">
 											RN
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_rs" value="RS" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'RS'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_rs" value="RS" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'RS'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_rs">
 											RS
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_ro" value="RO" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'RO'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_ro" value="RO" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'RO'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_ro">
 											RO
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_rr" value="RR" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'RR'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_rr" value="RR" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'RR'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_rr">
 											RR
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_sc" value="SC" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'SC'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_sc" value="SC" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'SC'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_sc">
 											SC
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_sp" value="SP" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'SP'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_sp" value="SP" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'SP'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_sp">
 											SP
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_se" value="SE" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'SE'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_se" value="SE" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'SE'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_se">
 											SE
 										</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="uf" id="uf_to" value="TO" <?php if(isset($dados['pericia']) && $dados['pericia']->uf_periciando == 'TO'){ echo 'checked'; } ?>>
+										<input class="form-check-input" type="radio" name="uf" id="uf_to" value="TO" <?php if(isset($dados['pericia']) && $dados['pericia']->uf == 'TO'){ echo 'checked'; } ?>>
 										<label class="form-check-label" for="uf_to">
 											TO
 										</label>
@@ -553,17 +553,17 @@
 						<div class="row g-3 mb-4">
 							<div class="col-12 col-md-6">
 								<label class="form-label small fw-bold">Profissão</label>
-								<input type="text" name="profissao" id="profissao" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->profissao_periciando; } ?>">
+								<input type="text" name="profissao" id="profissao" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->profissao; } ?>">
 							</div>
 							<div class="col-12 col-md-6">
 								<label class="form-label small fw-bold">Formação técnico-profissional</label>
-								<input type="text" name="formacao" id="formacao" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->formacao_periciando; } ?>">
+								<input type="text" name="formacao" id="formacao" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->formacao; } ?>">
 							</div>
 						</div>
 						<div class="row g-3 mb-4">
 							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">Outras formações técnico-profissionais</label>
-								<input type="text" name="outras_formacoes" id="outras_formacoes" class="form-control rounded-3 py-2" value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->outras_formacoes_periciando; } ?>">
+								<input type="text" name="outras_formacoes" id="outras_formacoes" class="form-control rounded-3 py-2" value="<?php if(isset($dados['pericia'])){ echo $dados['pericia']->outras_formacoes; } ?>">
 							</div>
 						</div>
 					</div>
@@ -746,7 +746,7 @@
 						<div class="row g-3 mb-4">
 							<div class="col-24 col-md-12">
 								<label class="form-label small fw-bold">a. Descreva o estado clínico da parte pericianda</label>
-								<textarea name="estado_clinico_exame" id="estado_clinico_exame" class="form-control rounded-3 py-2" required ><?php if(isset($dados['pericia'])){ echo $dados['pericia']->estado_clinico_exame; } ?></textarea>
+								<textarea name="estado_clinico" id="estado_clinico" class="form-control rounded-3 py-2" required ><?php if(isset($dados['pericia'])){ echo $dados['pericia']->estado_clinico; } ?></textarea>
 							</div>
 						</div>
 						<div class="row g-3 mb-4">
@@ -928,36 +928,11 @@
 				</h2>
 				<div id="panelsStayOpen-collapseNine" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingNine">
 					<div class="accordion-body">
-						<!-- Formulário para inserir anexos -->
-						<form id="formAnexos" enctype="multipart/form-data" class="form form-inline">
-						<div class="row g-3 mb-4 align-items-end">
-							<div class="col-15 col-md-5">
-								<label class="form-label small fw-bold">Título do anexo</label>
-								<input type="text" name="titulo_anexo" id="titulo_anexos" class="form-control rounded-3 py-2" placeholder="Digite o título do anexo">
-							</div>
-							<div class="col-15 col-md-5">
-								<label class="form-label small fw-bold">Arquivo</label>
-								<input type="file" name="arquivo_anexo" id="arquivo_anexo" class="form-control rounded-3 py-2">
-							</div>
-							<div class="col-6 col-md-2">
-								<button type="button" class="btn btn-primary rounded-3 px-4 w-100" id="btnInserirAnexo">
-									<i class="fa-solid fa-plus me-2"></i> Inserir Anexo
-								</button>
-							</div>
+						<div class="col-24 col-md-12">
+							<label class="form-label small fw-bold">Anexos</label>
+							<textarea name="anexos" id="anexos" class="form-control rounded-3 py-2" required><?php echo isset($dados['pericia']) ? $dados['pericia']->anexos : ''; ?></textarea>
 						</div>
-						</form>
 						
-						<!-- Card com documentos anexados -->
-						<div class="card rounded-3 border-0 bg-white mt-4">
-							<div class="card-header bg-white border-0 rounded-top-3">
-								<h5 class="card-title mb-0 fw-bold">Documentos Anexados</h5>
-							</div>
-							<div class="card-body">
-								<div id="listaAnexos">
-									<p class="text-muted">Nenhum documento anexado ainda.</p>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
