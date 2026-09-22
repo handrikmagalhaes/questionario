@@ -52,7 +52,6 @@
 								<input type="date" name="data_pericia" id="data_pericia" class="form-control rounded-3 py-2" required value="<?php if(isset($dados['pericia'])){echo $dados['pericia']->data_pericia;} ?>">
 							</div>
 						</div>
-						<input type="hidden" name="periciando_id" id="periciando_id" value="<?php if(isset($dados['pericia']->periciando_id)){echo $dados['pericia']->periciando_id;} else {echo '0';} ?>">
 						<div class="row g-3 mb-4">
 							<div class="col-12 col-md-6">
 								<label class="form-label small fw-bold">CPF do Periciando</label>
@@ -930,7 +929,7 @@
 					<div class="accordion-body">
 						<div class="col-24 col-md-12">
 							<label class="form-label small fw-bold">Anexos</label>
-							<textarea name="anexos" id="anexos" class="form-control rounded-3 py-2" required><?php echo isset($dados['pericia']) ? $dados['pericia']->anexos : ''; ?></textarea>
+							<textarea name="anexos" id="anexos" class="form-control rounded-3 py-2"><?php echo isset($dados['pericia']) ? $dados['pericia']->anexos : ''; ?></textarea>
 						</div>
 						
 					</div>

@@ -205,7 +205,7 @@ class RespostaModel extends CI_model {
         }
     }
 
-    public function listar_respostas(){
+    public function listar_respostas($tipo_pericia, $menor){
         if(!isset($_SESSION)){
             session_start();
         }
@@ -213,6 +213,16 @@ class RespostaModel extends CI_model {
 			//Usuarios Nativos
             $this->db->select('*');
             $this->db->from('resposta');
+            if ($tipo_pericia === 'SISPERJUD') {
+                $this->db->join('resposta_sisperjud', 'resposta.id = resposta_sisperjud.resposta_id');
+            } else if ($tipo_pericia === 'LOAS') {
+                if ($menor === 'Sim') {
+                    $this->db->where('resposta_loas.menor', "Sim");
+                } else  {
+                    $this->db->where('resposta_loas.menor', "Não");
+                }
+                $this->db->join('resposta_loas', 'resposta.id = resposta_loas.resposta_id');
+            }
             $data = $this->db->get()->result();
             return $data;
 			//$this->db->order_by($campo, $ord);

@@ -153,7 +153,7 @@ function calcularIdade(nascimento) {
 }
 
 function carregaSelectRespostas() {
-	$.get($("#url_base").text() + "resposta/listar", {"tipo": "SISPERJUD"}, function(data) {
+	$.get($("#url_base").text() + "resposta/listar", {"tipo": "SISPERJUD", "menor": ""}, function(data) {
 		console.log(data);
 		$("#selectRespostas").empty('');
 		$("#selectRespostas").append('<option value="">Selecione uma resposta</option>');

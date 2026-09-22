@@ -25,9 +25,10 @@ class SisperjudModel extends CI_model {
             session_start(); 
         }
         if (isset($_SESSION['logado'])) {
-            $retorno = array();
             $retorno = false;
-            $this->db->where('id', $dados['id']);
+            $id = $dados['id_pericia'];
+            unset($dados['id_pericia']);
+            $this->db->where('id', $id);
             if($this->db->update('pericias_sisperjud', $dados)){
                 $retorno = true;
             }

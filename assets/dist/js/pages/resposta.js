@@ -32,7 +32,7 @@ $(document).ready(function() {
 });
 
 function listarRespostas(){
-	$.get($("#url_base").text()+"resposta/listar", function(data){
+	$.get($("#url_base").text()+"resposta/listar", { tipo: "", menor: ""}, function(data){
 		$("#tblRespostas").empty(); //Apaga o conteúdo da tabela
 		$("#tblRespostas").html('<thead>\
                          		<tr class="py-3">\
@@ -222,17 +222,17 @@ function editarResposta(id) {
 			} else {			
 				$('input[name="menor"][value="Não"]').prop('checked', true).trigger('change');
 			}	
-			$("#portador_lesao_deficiencia").val(dados.resposta.portador_lesao_deficiencia);
-			$("#molestia_lesao").val(dados.resposta.molestia_lesao);
-			$("#doenca_infectocontagiosa").val(dados.resposta.doenca_infectocontagiosa);
-			$("#exercer_plenamente").val(dados.resposta.exercer_plenamente);
-			$("#impedimento_transitorio_permanente").val(dados.resposta.impedimento_transitorio_permanente);
-			$("#cuidados_medicos").val(dados.resposta.cuidados_medicos);
-			$("#prejudica_desenvolvimento").val(dados.resposta.prejudica_desenvolvimento);
-			$("#prejudica_atividades").val(dados.resposta.prejudica_atividades);
-			$("#quadro_clinico").val(dados.resposta.quadro_clinico);
+			$("#lesao").val(dados.resposta.lesao);
+			$("#impedimento_longo_prazo").val(dados.resposta.impedimento_longo_prazo);
+			$("#doenca_cronica").val(dados.resposta.doenca_cronica);
+			$("#exercer_atos").val(dados.resposta.exercer_atos);
+			$("#exercicio_pleno").val(dados.resposta.exercicio_pleno);
+			$("#permanentes_cuidados").val(dados.resposta.permanentes_cuidados);
+			$("#desenvolvimento_fisico_mental").val(dados.resposta.desenvolvimento_fisico_mental);
+			$("#prejudica_exercicio_atividade").val(dados.resposta.prejudica_exercicio_atividade);
+			$("#esforco_fisico").val(dados.resposta.esforco_fisico);
 			$("#documento_escolar").val(dados.resposta.documento_escolar);
-			$("#sustento_familiar").val(dados.resposta.sustento_familiar);
+			$("#impedir_atividade").val(dados.resposta.impedir_atividade);
 			$("#btnCadastrarLoas").text('Alterar');
 		}
 

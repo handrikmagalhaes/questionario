@@ -123,9 +123,11 @@ class Resposta extends CI_Controller {
 			session_start(); 
 		}
 		if(isset($_SESSION['logado'])){
+			$tipoPericia = $_GET['tipo'];
+			$menor = $_GET['menor'];
 			$this->load->model('RespostaModel');
 			$resposta = new RespostaModel;
-			$retorno = $resposta->listar_respostas();
+			$retorno = $resposta->listar_respostas($tipoPericia, $menor);
 			echo json_encode($retorno);
 		} else {
 			header('Location: '.base_url().'home');
